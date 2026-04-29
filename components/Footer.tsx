@@ -1,12 +1,17 @@
+import Image from "next/image";
+import Link from "next/link";
+
 export default function Footer() {
   return (
     <footer className="bg-primary-dark text-white/70">
       <div className="mx-auto max-w-7xl px-6 py-16">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-12">
           <div className="md:col-span-4">
-            <img
+            <Image
               src="/brand/cogmo_logo.svg"
               alt="Cogmo"
+              width={120}
+              height={26}
               className="h-[1.6rem] w-auto brightness-0 invert"
             />
             <p className="mt-4 leading-relaxed">
@@ -20,18 +25,9 @@ export default function Footer() {
               Company
             </h6>
             <ul className="space-y-2">
-              <li><a href="/about" className="text-sm transition hover:text-white">브랜드 소개</a></li>
-              <li><a href="/story" className="text-sm transition hover:text-white">코그모스토리</a></li>
-              <li>
-                <a
-                  href="https://www.cogmo.life/contact.html"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm transition hover:text-white"
-                >
-                  상담신청
-                </a>
-              </li>
+              <li><Link href="/about" className="text-sm transition hover:text-white">브랜드 소개</Link></li>
+              <li><Link href="/story" className="text-sm transition hover:text-white">코그모스토리</Link></li>
+              <li><Link href="/contact" className="text-sm transition hover:text-white">상담신청</Link></li>
             </ul>
           </div>
           <div className="md:col-span-3">
@@ -39,8 +35,8 @@ export default function Footer() {
               Services
             </h6>
             <ul className="space-y-2">
-              <li><a href="/service-hi" className="text-sm transition hover:text-white">인지기능 검사 &apos;안녕&apos;</a></li>
-              <li><a href="/service-fea" className="text-sm transition hover:text-white">근골격계 기능 검사 FEA</a></li>
+              <li><Link href="/service-hi" className="text-sm transition hover:text-white">인지기능 검사 &apos;안녕&apos;</Link></li>
+              <li><Link href="/service-fea" className="text-sm transition hover:text-white">근골격계 기능 검사 FEA</Link></li>
             </ul>
           </div>
           <div className="md:col-span-3">

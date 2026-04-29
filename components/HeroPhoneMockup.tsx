@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 /**
@@ -66,10 +67,13 @@ export default function HeroPhoneMockup() {
         <div className="absolute left-1/2 top-2 z-10 h-5 w-20 -translate-x-1/2 rounded-full bg-ink" />
         {/* Screen with image */}
         <div className="relative h-full overflow-hidden rounded-[2.25rem] bg-white">
-          <img
+          <Image
             src="/images/main/hero.jpg"
             alt="안녕 앱 — 인지건강 모니터링 목업"
-            className="h-full w-full object-cover object-top"
+            fill
+            priority
+            sizes="(max-width: 768px) 288px, 320px"
+            className="object-cover object-top"
           />
           {/* 슬롯머신 카운터 오버레이 — 원본 이미지의 "72점" 위치를 흰색 박스로 덮고 카운터 렌더 */}
           <div

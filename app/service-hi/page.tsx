@@ -2,6 +2,7 @@
  * 인지기능 검사 '안녕' 서비스 페이지
  * 원본: https://www.cogmo.life/service-hi.html
  */
+import Image from "next/image";
 
 const FEATURES = [
   { num: "01", title: "인지기능 정기 검사", desc: "6가지 인지영역의 동적 모니터링으로 일상 속 미세한 변화를 추적합니다." },
@@ -80,20 +81,26 @@ export default function ServiceHiPage() {
           </div>
           {/* Dual mockup — 좌: 대시보드, 우: 안녕 앱 (메인 히어로와 동일한 겹침 구도) */}
           <div className="relative py-12 md:py-16">
-            <img
+            <Image
               src="/images/service/annyeong/annyeong_main-1.jpg"
               alt="안녕 B2B 관리자 대시보드"
-              className="w-[80%] animate-fade-in-zoom"
+              width={1280}
+              height={800}
+              priority
+              sizes="(max-width: 1024px) 80vw, 640px"
+              className="w-[80%] h-auto animate-fade-in-zoom"
               style={{ boxShadow: "0 20px 40px rgba(50, 81, 49, 0.08)" }}
             />
             <div className="absolute right-0 top-1/2 w-[35%] -translate-y-1/2">
               <div className="relative aspect-[9/19] w-full animate-fade-in-zoom rounded-[2rem] bg-ink p-1 shadow-[0_20px_50px_rgba(0,0,0,0.22)]">
                 <div className="absolute left-1/2 top-2 z-10 h-4 w-16 -translate-x-1/2 rounded-full bg-ink" />
-                <div className="h-full overflow-hidden rounded-[1.75rem] bg-white">
-                  <img
+                <div className="relative h-full overflow-hidden rounded-[1.75rem] bg-white">
+                  <Image
                     src="/images/service/annyeong/annyeong_main-2.jpg"
                     alt="안녕 모바일 앱 화면"
-                    className="h-full w-full object-cover object-top"
+                    fill
+                    sizes="(max-width: 1024px) 28vw, 280px"
+                    className="object-cover object-top"
                   />
                 </div>
               </div>
