@@ -2,6 +2,7 @@
  * 브랜드 소개 페이지
  * 원본: https://www.cogmo.life/about.html
  */
+import Image from "next/image";
 
 const CARE_GAP = [
   { tag: "SENIOR", title: "시니어", desc: "병원 중심의 일회성 평가로 인해 일상 속 미세한 초기 변화(경도인지저하)를 놓치고 방치되는 경우가 많습니다." },
@@ -53,11 +54,13 @@ export default function AboutPage() {
       <section className="border-b border-hairline bg-white pb-36 pt-14">
         <div className="mx-auto max-w-5xl px-6">
           {/* 상단: 16:9 브랜드 메인 이미지 */}
-          <figure className="aspect-[16/9] w-full overflow-hidden rounded-2xl border border-hairline bg-surface">
-            <img
+          <figure className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl border border-hairline bg-surface">
+            <Image
               src="/images/about/brand-main-2.png"
               alt="스마트폰으로 '안녕' 앱을 함께 보는 시니어 커플"
-              className="h-full w-full object-cover"
+              fill
+              sizes="(max-width: 1024px) 100vw, 1024px"
+              className="object-cover"
             />
           </figure>
 

@@ -2,6 +2,7 @@
  * 기능적 움직임 평가 FEA 서비스 페이지
  * 원본: https://www.cogmo.life/service-fea.html
  */
+import Image from "next/image";
 
 const OVERALL_TESTS = [
   { num: "01", title: "Body Rotation", desc: "체간 회전 능력을 평가합니다. 좌식 체간 회전, 고관절 내회전, 고관절 Figure 4 등 세부 테스트를 포함합니다." },
@@ -83,11 +84,14 @@ export default function ServiceFeaPage() {
             <div className="absolute left-1/2 top-2 z-10 h-4 w-16 -translate-x-1/2 rounded-full bg-ink" />
             <div className="relative h-full overflow-hidden rounded-[1.75rem] bg-white">
               {[1, 2, 3, 4].map((n, idx) => (
-                <img
+                <Image
                   key={n}
                   src={`/images/service/FEA/main${n}.jpg`}
                   alt={`FEA 앱 화면 ${n}`}
-                  className="absolute inset-0 h-full w-full animate-fea-slide object-cover object-top opacity-0"
+                  fill
+                  sizes="260px"
+                  priority={idx === 0}
+                  className="animate-fea-slide object-cover object-top opacity-0"
                   style={{ animationDelay: `${idx * 4}s` }}
                 />
               ))}

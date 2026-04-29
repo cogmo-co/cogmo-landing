@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const NAV_GROUPS = [
   {
     label: "소개",
@@ -29,9 +31,10 @@ export default function Nav() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 bg-white/90 backdrop-blur">
       <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
-        <a href="/" className="flex items-center">
+        <Link href="/" className="flex items-center">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/brand/cogmo_logo.svg" alt="Cogmo" className="h-[1.4rem] w-auto" />
-        </a>
+        </Link>
         <ul className="hidden items-center gap-1 md:flex">
           {NAV_GROUPS.map((g) => (
             <li key={g.label} className="group relative">
@@ -43,32 +46,28 @@ export default function Nav() {
               </button>
               <div className="pointer-events-none invisible absolute left-0 top-full min-w-[220px] translate-y-1 rounded-xl border border-hairline bg-white p-2 opacity-0 shadow-[0_10px_30px_rgba(0,0,0,0.06)] transition group-hover:pointer-events-auto group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
                 {g.items.map((i) => (
-                  <a key={i.label} href={i.href} className="block rounded-md px-3 py-2 text-sm text-ink/80 transition hover:bg-surface hover:text-primary">
+                  <Link key={i.label} href={i.href} className="block rounded-md px-3 py-2 text-sm text-ink/80 transition hover:bg-surface hover:text-primary">
                     {i.label}
-                  </a>
+                  </Link>
                 ))}
               </div>
             </li>
           ))}
           <li className="ml-2">
-            <a
-              href="https://www.cogmo.life/contact.html"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/contact"
               className="rounded-lg bg-primary px-5 py-2.5 text-sm font-medium text-white transition hover:bg-primary-dark"
             >
               상담신청
-            </a>
+            </Link>
           </li>
         </ul>
-        <a
-          href="https://www.cogmo.life/contact.html"
-          target="_blank"
-          rel="noopener noreferrer"
+        <Link
+          href="/contact"
           className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white md:hidden"
         >
           상담신청
-        </a>
+        </Link>
       </nav>
     </header>
   );

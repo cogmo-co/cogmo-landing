@@ -4,6 +4,8 @@
  * Tone: 화이트 배경 + #325131 primary
  * Nav / Footer는 app/layout.tsx에서 래핑
  */
+import Image from "next/image";
+import Link from "next/link";
 import HeroPhoneMockup from "@/components/HeroPhoneMockup";
 
 export default function Home() {
@@ -95,10 +97,13 @@ export default function Home() {
 
             {/* Dual mockup — 좌: B2B 대시보드, 우: 안녕 앱 (세로로 길게 살짝 겹침) */}
             <div className="relative py-12 md:py-16">
-              <img
+              <Image
                 src="/images/main/section2-1.jpg"
                 alt="안녕 B2B 관리자 대시보드"
-                className="w-[80%]"
+                width={1280}
+                height={800}
+                sizes="(max-width: 1024px) 80vw, 640px"
+                className="w-[80%] h-auto"
                 style={{ boxShadow: "0 20px 40px rgba(50, 81, 49, 0.08)" }}
               />
               {/* 우측 폰 — 세로 중앙 정렬, 상하로 대시보드 밖으로 삐져나옴 */}
@@ -107,11 +112,13 @@ export default function Home() {
                   {/* Dynamic Island */}
                   <div className="absolute left-1/2 top-2 z-10 h-4 w-16 -translate-x-1/2 rounded-full bg-ink" />
                   {/* Screen */}
-                  <div className="h-full overflow-hidden rounded-[1.75rem] bg-white">
-                    <img
+                  <div className="relative h-full overflow-hidden rounded-[1.75rem] bg-white">
+                    <Image
                       src="/images/main/section2-2.jpg"
                       alt="안녕 모바일 앱 화면"
-                      className="h-full w-full object-cover object-top"
+                      fill
+                      sizes="(max-width: 1024px) 28vw, 280px"
+                      className="object-cover object-top"
                     />
                   </div>
                 </div>
@@ -250,6 +257,7 @@ export default function Home() {
                   className="group flex h-full flex-col rounded-2xl border border-hairline bg-white p-8 transition hover:border-primary/40 hover:shadow-[0_10px_30px_rgba(50,81,49,0.08)]"
                 >
                   <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={`/images/main/${t.icon}.svg`}
                       alt=""
@@ -315,7 +323,7 @@ export default function Home() {
                   </h6>
                   <div className="mt-4 space-y-3">
                     {g.items.map((i) => (
-                      <a
+                      <Link
                         key={i.title}
                         href={i.href}
                         className="group flex items-center justify-between rounded-xl border border-hairline bg-white p-5 transition hover:border-primary/40 hover:shadow-md"
@@ -327,7 +335,7 @@ export default function Home() {
                         <svg className="h-5 w-5 flex-none text-primary transition group-hover:translate-x-0.5" viewBox="0 0 20 20" fill="none" aria-hidden>
                           <path d="m8 5 5 5-5 5" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
-                      </a>
+                      </Link>
                     ))}
                   </div>
                 </div>
