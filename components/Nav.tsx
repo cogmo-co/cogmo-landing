@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 
 const NAV_GROUPS = [
@@ -33,14 +32,8 @@ export default function Nav() {
     <header className="fixed inset-x-0 top-0 z-50 bg-white/90 backdrop-blur">
       <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
         <Link href="/" className="flex items-center">
-          <Image
-            src="/brand/cogmo_logo.svg"
-            alt="Cogmo"
-            width={100}
-            height={22}
-            priority
-            className="h-[1.4rem] w-auto"
-          />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/brand/cogmo_logo.svg" alt="Cogmo" className="h-[1.4rem] w-auto" />
         </Link>
         <ul className="hidden items-center gap-1 md:flex">
           {NAV_GROUPS.map((g) => (

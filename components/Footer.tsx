@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 
 export default function Footer() {
@@ -7,11 +6,10 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-6 py-16">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-12">
           <div className="md:col-span-4">
-            <Image
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
               src="/brand/cogmo_logo.svg"
               alt="Cogmo"
-              width={120}
-              height={26}
               className="h-[1.6rem] w-auto brightness-0 invert"
             />
             <p className="mt-4 leading-relaxed">

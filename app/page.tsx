@@ -257,11 +257,10 @@ export default function Home() {
                   className="group flex h-full flex-col rounded-2xl border border-hairline bg-white p-8 transition hover:border-primary/40 hover:shadow-[0_10px_30px_rgba(50,81,49,0.08)]"
                 >
                   <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
-                    <Image
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
                       src={`/images/main/${t.icon}.svg`}
                       alt=""
-                      width={28}
-                      height={28}
                       className="h-7 w-7"
                     />
                   </div>
