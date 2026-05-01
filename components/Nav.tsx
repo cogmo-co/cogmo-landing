@@ -1,11 +1,14 @@
 import Link from "next/link";
+import MobileMenu, { type NavGroup } from "./MobileMenu";
 
-const NAV_GROUPS = [
+const NAV_GROUPS: NavGroup[] = [
   {
     label: "소개",
     items: [
       { label: "브랜드 소개", href: "/about" },
       { label: "코그모스토리", href: "/story" },
+      { label: "다운로드", href: "/download" },
+      { label: "아티클", href: "/articles" },
     ],
   },
   {
@@ -35,39 +38,44 @@ export default function Nav() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/brand/cogmo_logo.svg" alt="Cogmo" className="h-[1.4rem] w-auto" />
         </Link>
-        <ul className="hidden items-center gap-1 md:flex">
-          {NAV_GROUPS.map((g) => (
-            <li key={g.label} className="group relative">
-              <button className="flex items-center gap-1 rounded-md px-4 py-2 text-sm font-medium text-ink/80 transition hover:text-primary">
-                {g.label}
-                <svg className="h-3 w-3 opacity-60" viewBox="0 0 12 12" fill="none" aria-hidden>
-                  <path d="M3 4.5 6 7.5 9 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </button>
-              <div className="pointer-events-none invisible absolute left-0 top-full min-w-[220px] translate-y-1 rounded-xl border border-hairline bg-white p-2 opacity-0 shadow-[0_10px_30px_rgba(0,0,0,0.06)] transition group-hover:pointer-events-auto group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
-                {g.items.map((i) => (
-                  <Link key={i.label} href={i.href} className="block rounded-md px-3 py-2 text-sm text-ink/80 transition hover:bg-surface hover:text-primary">
-                    {i.label}
-                  </Link>
-                ))}
-              </div>
-            </li>
-          ))}
-          <li className="ml-2">
-            <Link
-              href="/contact"
-              className="rounded-lg bg-primary px-5 py-2.5 text-sm font-medium text-white transition hover:bg-primary-dark"
-            >
-              상담신청
-            </Link>
-          </li>
-        </ul>
-        <Link
-          href="/contact"
-          className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white md:hidden"
-        >
-          상담신청
-        </Link>
+
+        {/* 우측: 데스크탑 nav 그룹 + CTA + 모바일 햄버거 */}
+        <div className="flex items-center gap-2 md:gap-4">
+          {/* 데스크탑 nav 그룹 (md 이상에서만) */}
+          <ul className="hidden items-center gap-1 md:flex">
+            {NAV_GROUPS.map((g) => (
+              <li key={g.label} className="group relative">
+                <button type="button" className="flex items-center gap-1 rounded-md px-4 py-2 text-sm font-medium text-ink/80 transition hover:font-bold hover:text-primary">
+                  {g.label}
+                  <svg className="h-3 w-3 opacity-60" viewBox="0 0 12 12" fill="none" aria-hidden>
+                    <path d="M3 4.5 6 7.5 9 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </button>
+                <div className="pointer-events-none invisible absolute left-0 top-full min-w-[220px] translate-y-1 rounded-xl border border-hairline bg-white p-2 opacity-0 shadow-[0_10px_30px_rgba(0,0,0,0.06)] transition group-hover:pointer-events-auto group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
+                  {g.items.map((i) => (
+                    <Link key={i.label} href={i.href} className="block rounded-md px-3 py-2 text-sm text-ink/80 transition hover:bg-surface hover:font-bold hover:text-primary">
+                      {i.label}
+                    </Link>
+                  ))}
+                </div>
+              </li>
+            ))}
+          </ul>
+
+          <Link
+            href="/download"
+            className="rounded-lg border border-primary px-3 py-2 text-sm font-medium text-primary transition hover:bg-primary hover:text-white md:px-5 md:py-2.5"
+          >
+            다운로드
+          </Link>
+          <Link
+            href="/contact"
+            className="rounded-lg bg-primary px-3 py-2 text-sm font-medium text-white transition hover:bg-primary-dark md:px-5 md:py-2.5"
+          >
+            도입문의
+          </Link>
+          <MobileMenu groups={NAV_GROUPS} />
+        </div>
       </nav>
     </header>
   );
