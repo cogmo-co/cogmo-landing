@@ -2,7 +2,6 @@ import { upload } from "@vercel/blob/client";
 import type { Article, PaginatedArticles } from "@/lib/articles/types";
 import type { ArticleCategory } from "@/lib/articles/categories";
 import type { ArticleStatus } from "@/lib/articles/status";
-import { resizeToWebP } from "./utils";
 
 // ============================================================
 // 인증
@@ -24,6 +23,7 @@ export async function logout(): Promise<void> {
 // Article CRUD
 // ============================================================
 export interface ArticleInput {
+  id?: string;
   title: string;
   body: string;
   category: ArticleCategory;
@@ -64,30 +64,6 @@ export async function deleteArticle(id: string): Promise<void> {
 }
 
 // ============================================================
-// 이미지 업로드 (클라이언트 변환 → Blob)
-// ============================================================
-export async function uploadImage(file: File): Promise<string> {
-  const webpBlob = await resizeToWebP(file);
-  const folderId = `${new Date().toISOString().slice(0, 10).replace(/-/g, "")}-${Date.now()}`;
-  const webpFile = new File([webpBlob], `articles/${folderId}.webp`, { type: "image/webp" });
-
-  const blob = await upload(webpFile.name, webpFile, {
-    access: "public",
-    handleUploadUrl: "/api/admin/blob",
-  });
-  return blob.url;
-}
-
-export async function deleteImages(urls: string[]): Promise<void> {
-  if (urls.length === 0) return;
-  await fetch("/api/admin/blob", {
-    method: "DELETE",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ urls }),
-  }).catch(() => {});
-}
-
-// ============================================================
 // 저장 시점: 본문/cover 안의 data URL을 Blob에 일괄 업로드 후 URL 치환
 // ============================================================
 
@@ -103,16 +79,22 @@ function extractDataUrls(html: string): string[] {
   return urls;
 }
 
-async function dataUrlToFile(dataUrl: string): Promise<File> {
+async function dataUrlToFile(
+  dataUrl: string,
+  articleId: string,
+): Promise<File> {
   const res = await fetch(dataUrl);
   const blob = await res.blob();
-  const folderId = `${new Date().toISOString().slice(0, 10).replace(/-/g, "")}-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
-  return new File([blob], `articles/${folderId}.webp`, { type: "image/webp" });
+  const filename = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}.webp`;
+  return new File([blob], `articles/${articleId}/${filename}`, {
+    type: "image/webp",
+  });
 }
 
 export async function processEmbeddedImages(
   body: string,
   cover: string | null,
+  articleId: string,
   onProgress?: (current: number, total: number) => void
 ): Promise<{ body: string; cover: string | null }> {
   const bodyDataUrls = extractDataUrls(body);
@@ -127,7 +109,7 @@ export async function processEmbeddedImages(
   let i = 0;
   for (const dataUrl of unique) {
     onProgress?.(++i, unique.size);
-    const file = await dataUrlToFile(dataUrl);
+    const file = await dataUrlToFile(dataUrl, articleId);
     const result = await upload(file.name, file, {
       access: "public",
       handleUploadUrl: "/api/admin/blob",

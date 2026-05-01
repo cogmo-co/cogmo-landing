@@ -4,6 +4,7 @@ import { verifyToken, checkCsrf } from "@/lib/auth";
 import { supabase } from "@/lib/supabase";
 import { ADMIN_PAGE_SIZE } from "@/lib/articles/constants";
 import { sanitizeArticleHtml } from "@/lib/articles/sanitize";
+import { extractExcerpt } from "@/lib/articles/excerpt";
 import { validateArticleInput } from "@/lib/articles/validation";
 
 // ============================================================
@@ -50,15 +51,18 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: validation.error }, { status: 400 });
     }
 
-    const { title, body, category, status, cover_url } = input;
+    const { id, title, body, category, status, cover_url } = input;
     const safeBody = sanitizeArticleHtml(body);
+    const excerpt = extractExcerpt(safeBody);
     const publishedAt = status === "published" ? new Date().toISOString() : null;
 
     const { data, error } = await supabase
       .from("articles")
       .insert({
+        ...(id && { id }),
         title,
         body: safeBody,
+        excerpt,
         category,
         status,
         cover_url: cover_url || null,

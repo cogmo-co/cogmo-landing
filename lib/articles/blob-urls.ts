@@ -1,6 +1,6 @@
 const BLOB_HOST_PATTERN = /^[a-z0-9-]+\.public\.blob\.vercel-storage\.com$/i;
 
-export function isBlobUrl(url: string): boolean {
+function isBlobUrl(url: string): boolean {
   try {
     const { hostname } = new URL(url);
     return BLOB_HOST_PATTERN.test(hostname);
@@ -9,7 +9,7 @@ export function isBlobUrl(url: string): boolean {
   }
 }
 
-export function extractBlobUrls(html: string): string[] {
+function extractBlobUrls(html: string): string[] {
   const urls: string[] = [];
   const imgPattern = /<img[^>]+src=["']([^"']+)["'][^>]*>/gi;
   let match;

@@ -10,3 +10,7 @@ export const BODY_MAX_LENGTH = 200_000;
 export const MAX_IMAGE_SIZE_MB = 5;
 export const ALLOWED_IMAGE_TYPES = ["image/jpeg", "image/png", "image/webp"] as const;
 
+// Trending
+export const TRENDING_DAYS = 7;
+export const TRENDING_LIMIT = 5;
+

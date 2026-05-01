@@ -3,6 +3,7 @@ import { ARTICLE_CATEGORIES } from "./categories";
 import { ARTICLE_STATUSES } from "./status";
 
 export type ArticleInput = {
+  id?: unknown;
   title?: unknown;
   body?: unknown;
   category?: unknown;
@@ -10,9 +11,15 @@ export type ArticleInput = {
   cover_url?: unknown;
 };
 
-export function validateArticleInput(input: ArticleInput): { error?: string } {
-  const { title, body, category, status, cover_url } = input;
+const UUID_RE =
+  /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
+export function validateArticleInput(input: ArticleInput): { error?: string } {
+  const { id, title, body, category, status, cover_url } = input;
+
+  if (id !== undefined && (typeof id !== "string" || !UUID_RE.test(id))) {
+    return { error: "잘못된 id" };
+  }
   if (!title || typeof title !== "string" || title.length > TITLE_MAX_LENGTH) {
     return { error: `제목은 1~${TITLE_MAX_LENGTH}자 사이여야 합니다` };
   }

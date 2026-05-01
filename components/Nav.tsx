@@ -6,6 +6,7 @@ const NAV_GROUPS = [
     items: [
       { label: "브랜드 소개", href: "/about" },
       { label: "코그모스토리", href: "/story" },
+      { label: "아티클", href: "/articles" },
     ],
   },
   {

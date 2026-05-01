@@ -1,11 +1,12 @@
 import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
-import { del } from "@vercel/blob";
+import { del, list } from "@vercel/blob";
 import { verifyToken, checkCsrf } from "@/lib/auth";
 import { supabase } from "@/lib/supabase";
 import { sanitizeArticleHtml } from "@/lib/articles/sanitize";
+import { extractExcerpt } from "@/lib/articles/excerpt";
 import { validateArticleInput } from "@/lib/articles/validation";
-import { extractBlobUrls, diffBlobUrls, isBlobUrl } from "@/lib/articles/blob-urls";
+import { diffBlobUrls } from "@/lib/articles/blob-urls";
 
 // ============================================================
 // PUT — 수정 (사라진 blob 이미지 정리)
@@ -32,6 +33,7 @@ export async function PUT(
 
     const { title, body, category, status, cover_url } = input;
     const safeBody = sanitizeArticleHtml(body);
+    const excerpt = extractExcerpt(safeBody);
 
     const { data: existing } = await supabase
       .from("articles")
@@ -55,6 +57,7 @@ export async function PUT(
       .update({
         title,
         body: safeBody,
+        excerpt,
         category,
         status,
         cover_url: cover_url || null,
@@ -105,7 +108,7 @@ export async function DELETE(
 
   const { data: article } = await supabase
     .from("articles")
-    .select("body, cover_url")
+    .select("id")
     .eq("id", id)
     .single();
 
@@ -113,13 +116,14 @@ export async function DELETE(
     return NextResponse.json({ error: "article 없음" }, { status: 404 });
   }
 
-  const urlsToDelete = extractBlobUrls(article.body);
-  if (article.cover_url && isBlobUrl(article.cover_url)) {
-    urlsToDelete.push(article.cover_url);
-  }
-
-  if (urlsToDelete.length > 0) {
-    await del(urlsToDelete).catch(() => {});
+  // 글 폴더 통째로 정리 (본문에서 제거됐던 이미지/cover 포함 모두 삭제)
+  try {
+    const { blobs } = await list({ prefix: `articles/${id}/` });
+    if (blobs.length > 0) {
+      await del(blobs.map((b) => b.url));
+    }
+  } catch (e) {
+    console.error("blob 폴더 삭제 실패:", e);
   }
 
   const { error } = await supabase.from("articles").delete().eq("id", id);

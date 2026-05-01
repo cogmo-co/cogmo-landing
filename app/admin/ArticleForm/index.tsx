@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { Article } from "@/lib/articles/types";
 import type { ArticleCategory } from "@/lib/articles/categories";
 import { ARTICLE_CATEGORIES } from "@/lib/articles/categories";
@@ -22,6 +22,12 @@ export default function ArticleForm({
   onSaved,
   onCancel,
 }: ArticleFormProps) {
+  // 신규: 클라가 UUID 발급 → blob 폴더(articles/{id}/) + DB INSERT 모두 같은 id 사용
+  const articleId = useMemo(
+    () => initialArticle?.id ?? crypto.randomUUID(),
+    [initialArticle],
+  );
+
   const [title, setTitle] = useState(initialArticle?.title ?? "");
   const [body, setBody] = useState(initialArticle?.body ?? "");
   const [category, setCategory] = useState<ArticleCategory>(
@@ -76,10 +82,11 @@ export default function ArticleForm({
 
     setSaving(true);
     try {
-      // 1. 본문/cover 안의 data URL을 Blob에 일괄 업로드
+      // 1. 본문/cover 안의 data URL을 Blob에 일괄 업로드 (articles/{articleId}/ 폴더로)
       const { body: finalBody, cover: finalCover } = await api.processEmbeddedImages(
         body,
         coverUrl,
+        articleId,
         (cur, total) => setSavingMsg(`이미지 업로드 중 (${cur}/${total})...`)
       );
 
@@ -100,7 +107,7 @@ export default function ArticleForm({
       if (initialArticle) {
         await api.updateArticle(initialArticle.id, input);
       } else {
-        await api.createArticle(input);
+        await api.createArticle({ id: articleId, ...input });
       }
       onSaved();
     } catch {
