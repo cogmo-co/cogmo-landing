@@ -7,6 +7,7 @@ const EXPIRES_IN = "8h";
 const ALLOWED_ORIGINS = [
   "https://cogmo.life",
   "https://www.cogmo.life",
+  "https://cogmo-landing.vercel.app", // 도메인 연결 후 제거
   "http://localhost:3000",
 ];
 
