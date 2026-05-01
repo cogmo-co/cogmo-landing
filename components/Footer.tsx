@@ -18,7 +18,7 @@ export default function Footer() {
               데이터 기반 시니어 인지건강 플랫폼.
             </p>
           </div>
-          <div className="md:col-span-2">
+          <div className="hidden md:block md:col-span-2">
             <h6 className="mb-4 text-sm font-semibold uppercase tracking-wider text-white">
               Company
             </h6>
@@ -28,7 +28,7 @@ export default function Footer() {
               <li><Link href="/contact" className="text-sm transition hover:text-white">상담신청</Link></li>
             </ul>
           </div>
-          <div className="md:col-span-3">
+          <div className="hidden md:block md:col-span-3">
             <h6 className="mb-4 text-sm font-semibold uppercase tracking-wider text-white">
               Services
             </h6>
