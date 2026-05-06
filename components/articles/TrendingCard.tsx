@@ -54,7 +54,7 @@ export default function TrendingCard({ article }: TrendingCardProps) {
           <span className="text-right text-xs text-muted">{dateStr}</span>
         )}
 
-        <div className="flex flex-1 flex-col justify-between gap-2">
+        <div className="mt-3 flex flex-1 flex-col justify-between gap-2 md:mt-0">
           <h3 className="line-clamp-2 text-lg font-bold leading-snug text-ink md:text-xl">
             {article.title}
           </h3>
