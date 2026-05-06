@@ -3,6 +3,7 @@
  * 원본: https://www.cogmo.life/healthcare-senior.html
  */
 import ImageCarousel from "@/components/ImageCarousel";
+import CTASection from "@/components/CTASection";
 
 const PARTNERS = [
   "제이액터스 시니어 모델에이전시",
@@ -154,35 +155,12 @@ export default function HealthcareSeniorPage() {
         </div>
       </section>
 
-      <section className="bg-primary py-40 text-white">
-        <div className="mx-auto max-w-3xl px-6 text-center">
-          <h2 className="text-3xl font-bold leading-tight md:text-4xl">
-            액티브 시니어의 일상, 함께 설계해드립니다
-          </h2>
-          <p className="mt-5 text-lg text-white/80">
-            복지관·문화센터·시니어 커뮤니티 단위의 정기 프로그램부터
-            단체세미나까지, 규모에 맞춰 제안드릴게요.
-          </p>
-          <div className="mt-10 flex flex-wrap justify-center gap-3">
-            <a
-              href="https://www.cogmo.life/contact.html"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-lg bg-white px-7 py-3.5 font-medium text-primary transition hover:bg-white/90"
-            >
-              프로그램 문의하기
-            </a>
-            <a
-              href="https://www.cogmo.life/contact.html"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-lg border border-white/60 px-7 py-3.5 font-medium text-white transition hover:bg-white hover:text-primary"
-            >
-              기관 도입 상담
-            </a>
-          </div>
-        </div>
-      </section>
+      <CTASection
+        title="액티브 시니어의 일상, 함께 설계해드립니다"
+        description="복지관·문화센터·시니어 커뮤니티 단위의 정기 프로그램부터 단체세미나까지, 규모에 맞춰 제안드릴게요."
+        primaryAction={{ label: "프로그램 문의하기", href: "/contact" }}
+        secondaryAction={{ label: "기관 도입 상담", href: "/contact" }}
+      />
     </>
   );
 }

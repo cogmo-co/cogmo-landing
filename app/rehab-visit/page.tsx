@@ -4,6 +4,7 @@
  * Nav/Footer는 app/layout.tsx에서 래핑됨
  */
 import ImageCarousel from "@/components/ImageCarousel";
+import CTASection from "@/components/CTASection";
 
 const MODULES = [
   { num: "01", title: "근감소증 예방", desc: "하지 중심 저항성 운동으로 나이와 함께 빠르게 줄어드는 근육량을 유지·회복합니다." },
@@ -158,34 +159,12 @@ export default function RehabVisitPage() {
       </section>
 
       {/* Final CTA */}
-      <section className="bg-primary py-40 text-white">
-        <div className="mx-auto max-w-3xl px-6 text-center">
-          <h2 className="text-3xl font-bold leading-tight md:text-4xl">
-            지금 부모님의 회복을 시작해보세요
-          </h2>
-          <p className="mt-5 text-lg text-white/80">
-            방문재활 일정 예약부터 기관 도입 상담까지, 편한 방법으로 연락주세요.
-          </p>
-          <div className="mt-10 flex flex-wrap justify-center gap-3">
-            <a
-              href="https://www.cogmo.life/contact.html"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-lg bg-white px-7 py-3.5 font-medium text-primary transition hover:bg-white/90"
-            >
-              일정 예약하기
-            </a>
-            <a
-              href="https://www.cogmo.life/contact.html"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-lg border border-white/60 px-7 py-3.5 font-medium text-white transition hover:bg-white hover:text-primary"
-            >
-              기관 도입 문의
-            </a>
-          </div>
-        </div>
-      </section>
+      <CTASection
+        title="지금 부모님의 회복을 시작해보세요"
+        description="방문재활 일정 예약부터 기관 도입 상담까지, 편한 방법으로 연락주세요."
+        primaryAction={{ label: "일정 예약하기", href: "/contact" }}
+        secondaryAction={{ label: "기관 도입 문의", href: "/contact" }}
+      />
     </>
   );
 }

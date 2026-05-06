@@ -3,6 +3,7 @@
  * 원본: https://www.cogmo.life/service-hi.html
  */
 import Image from "next/image";
+import CTASection from "@/components/CTASection";
 
 const FEATURES = [
   { num: "01", title: "인지기능 정기 검사", desc: "6가지 인지영역의 동적 모니터링으로 일상 속 미세한 변화를 추적합니다." },
@@ -43,7 +44,8 @@ export default function ServiceHiPage() {
           <p className="mt-5 text-base leading-relaxed text-body md:text-lg">
             진단 이전에 시작하는 인지건강 모니터링
             <br />
-            검사·추적·관리를 하나의 앱에서, 시니어 스스로 참여할 수 있게 설계했습니다.
+            검사·추적·관리를 하나의 앱에서,{" "}
+            <span className="block md:inline">시니어 스스로 참여할 수 있게 설계했습니다.</span>
           </p>
         </div>
       </section>
@@ -57,7 +59,7 @@ export default function ServiceHiPage() {
             </p>
             <h2 className="mt-4 text-3xl font-bold leading-tight text-ink md:text-4xl">
               건강할 때 시작하는{" "}
-              <span className="text-primary">인지건강 모니터링</span>
+              <span className="block text-primary md:inline">인지건강 모니터링</span>
             </h2>
             <p className="mt-5 leading-relaxed text-body">
               기존 인지검사는 이미 증상이 나타난 뒤 &apos;진단&apos;을 위해
@@ -151,7 +153,7 @@ export default function ServiceHiPage() {
             </p>
             <h2 className="mt-4 text-3xl font-bold leading-tight text-ink md:text-4xl">
               시니어 맞춤 UX와{" "}
-              <span className="text-primary">신뢰도 높은 AI 분석</span>
+              <span className="block text-primary md:inline">신뢰도 높은 AI 분석</span>
             </h2>
           </div>
           <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2">
@@ -209,10 +211,12 @@ export default function ServiceHiPage() {
               B2B Dashboard
             </p>
             <h2 className="mt-4 text-3xl font-bold leading-tight text-ink md:text-4xl">
-              기관을 위한 <span className="text-primary">통합 관리 대시보드</span>
+              기관을 위한{" "}
+              <span className="block text-primary md:inline">통합 관리 대시보드</span>
             </h2>
             <p className="mt-4 text-body">
-              방문요양·주야간보호센터 등 요양기관을 위한 데이터 기반 관제 시스템.
+              방문요양·주야간보호센터 등 요양기관을 위한{" "}
+              <span className="block md:inline">데이터 기반 관제 시스템.</span>
             </p>
           </div>
           <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-3">
@@ -229,35 +233,12 @@ export default function ServiceHiPage() {
         </div>
       </section>
 
-      <section className="bg-primary py-40 text-white">
-        <div className="mx-auto max-w-3xl px-6 text-center">
-          <h2 className="text-3xl font-bold leading-tight md:text-4xl">
-            인지건강, 진단 이전에 시작해보세요
-          </h2>
-          <p className="mt-5 text-lg text-white/80">
-            개인은 무료 검사로, 기관은 통합 대시보드로 — 가장 빠르게 시작하는
-            방법을 선택하세요.
-          </p>
-          <div className="mt-10 flex flex-wrap justify-center gap-3">
-            <a
-              href="https://hi.cogmo.life"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-lg bg-white px-7 py-3.5 font-medium text-primary transition hover:bg-white/90"
-            >
-              무료 검사 시작
-            </a>
-            <a
-              href="https://www.cogmo.life/contact.html"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-lg border border-white/60 px-7 py-3.5 font-medium text-white transition hover:bg-white hover:text-primary"
-            >
-              기관 도입 문의
-            </a>
-          </div>
-        </div>
-      </section>
+      <CTASection
+        title="인지건강, 진단 이전에 시작해보세요"
+        description={<>개인은 무료 검사로, 기관은 통합 대시보드로{" "}<span className="block md:inline">— 가장 빠르게 시작하는 방법을 선택하세요.</span></>}
+        primaryAction={{ label: "무료 검사 시작", href: "https://hi.cogmo.life", disabled: true }}
+        secondaryAction={{ label: "기관 도입 문의", href: "/contact" }}
+      />
     </>
   );
 }

@@ -3,6 +3,7 @@
  * 원본: https://www.cogmo.life/healthcare-youth.html
  */
 import ImageCarousel from "@/components/ImageCarousel";
+import CTASection from "@/components/CTASection";
 
 const PARTNERS = [
   "롯데백화점 문화센터",
@@ -157,35 +158,12 @@ export default function HealthcareYouthPage() {
         </div>
       </section>
 
-      <section className="bg-primary py-40 text-white">
-        <div className="mx-auto max-w-3xl px-6 text-center">
-          <h2 className="text-3xl font-bold leading-tight md:text-4xl">
-            아이들의 건강한 성장, 함께 시작합니다
-          </h2>
-          <p className="mt-5 text-lg text-white/80">
-            문화센터·아카데미·학교 단위의 단체 프로그램을 체형·연령·목표에
-            맞춰 설계해드립니다.
-          </p>
-          <div className="mt-10 flex flex-wrap justify-center gap-3">
-            <a
-              href="https://www.cogmo.life/contact.html"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-lg bg-white px-7 py-3.5 font-medium text-primary transition hover:bg-white/90"
-            >
-              프로그램 문의하기
-            </a>
-            <a
-              href="https://www.cogmo.life/contact.html"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-lg border border-white/60 px-7 py-3.5 font-medium text-white transition hover:bg-white hover:text-primary"
-            >
-              기관 도입 상담
-            </a>
-          </div>
-        </div>
-      </section>
+      <CTASection
+        title="아이들의 건강한 성장, 함께 시작합니다"
+        description="문화센터·아카데미·학교 단위의 단체 프로그램을 체형·연령·목표에 맞춰 설계해드립니다."
+        primaryAction={{ label: "프로그램 문의하기", href: "/contact" }}
+        secondaryAction={{ label: "기관 도입 상담", href: "/contact" }}
+      />
     </>
   );
 }

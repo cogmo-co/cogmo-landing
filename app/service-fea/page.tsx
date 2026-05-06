@@ -3,6 +3,7 @@
  * 원본: https://www.cogmo.life/service-fea.html
  */
 import Image from "next/image";
+import CTASection from "@/components/CTASection";
 
 const OVERALL_TESTS = [
   { num: "01", title: "Body Rotation", desc: "체간 회전 능력을 평가합니다. 좌식 체간 회전, 고관절 내회전, 고관절 Figure 4 등 세부 테스트를 포함합니다." },
@@ -16,7 +17,7 @@ const OVERALL_TESTS = [
 ];
 
 const SCORING = [
-  { tag: "O", title: "정상 수행", desc: "Overall Test를 정상적으로 수행하면 O 판정. 해당 항목의 Detail Test는 생략하고 만점을 부여합니다." },
+  { tag: "O", title: "정상 수행", desc: "Overall Test를 정상적으로 수행하면\nO 판정. 해당 항목의 Detail Test는 생략하고 만점을 부여합니다." },
   { tag: "X", title: "수행 불가", desc: "Overall Test를 수행하지 못하면 X 판정. Detail Test를 진행하여 제한의 원인을 세부적으로 분석합니다." },
   { tag: "⚠", title: "Alarm", desc: "통증이 발생하면 Alarm 판정.\n해당 영역의 점수는 0점 처리되며, 전문가 상담을 우선 권고합니다." },
 ];
@@ -46,9 +47,11 @@ export default function ServiceFeaPage() {
             기능적 움직임 평가 FEA
           </h1>
           <p className="mt-5 text-base leading-relaxed text-body md:text-lg">
-            20분 내외, 8가지 움직임으로 신체 기능 역량을 파악합니다.
+            20분 내외, 8가지 움직임으로{" "}
+            <span className="block md:inline">신체 기능 역량을 파악합니다.</span>
             <br />
-            100점 만점의 정량적 점수로 운동 방향성을 즉시 제시합니다.
+            100점 만점의 정량적 점수로 운동 방향성을{" "}
+            <span className="block md:inline">즉시 제시합니다.</span>
           </p>
         </div>
       </section>
@@ -136,7 +139,8 @@ export default function ServiceFeaPage() {
             </p>
             <h2 className="mt-4 text-3xl font-bold leading-tight text-ink md:text-4xl">
               100점 만점{" "}
-              <span className="text-primary">O / X / Alarm</span> 평가 체계
+              <span className="block text-primary md:inline">O / X / Alarm</span>{" "}
+              <span className="block md:inline">평가 체계</span>
             </h2>
           </div>
           <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-3">
@@ -215,33 +219,12 @@ export default function ServiceFeaPage() {
         </div>
       </section>
 
-      <section className="bg-primary py-40 text-white">
-        <div className="mx-auto max-w-3xl px-6 text-center">
-          <h2 className="text-3xl font-bold leading-tight md:text-4xl">
-            움직임 역량, 20분 만에 확인하세요
-          </h2>
-          <p className="mt-5 text-lg text-white/80">
-            방문재활·기업 헬스케어·연구 협력 등 FEA를 현장에 도입하고자 하신다면
-            편하게 문의주세요.
-          </p>
-          <div className="mt-10 flex flex-wrap justify-center gap-3">
-            <a
-              href="https://www.cogmo.life/contact.html"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-lg bg-white px-7 py-3.5 font-medium text-primary transition hover:bg-white/90"
-            >
-              FEA 도입 문의
-            </a>
-            <a
-              href="mailto:official@cogmo.life"
-              className="rounded-lg border border-white/60 px-7 py-3.5 font-medium text-white transition hover:bg-white hover:text-primary"
-            >
-              연구 · 협력 제안
-            </a>
-          </div>
-        </div>
-      </section>
+      <CTASection
+        title="움직임 역량, 20분 만에 확인하세요"
+        description="방문재활·기업 헬스케어·연구 협력 등 FEA를 현장에 도입하고자 하신다면 편하게 문의주세요."
+        primaryAction={{ label: "FEA 도입 문의", href: "/contact" }}
+        secondaryAction={{ label: "연구 · 협력 제안", href: "mailto:official@cogmo.life" }}
+      />
     </>
   );
 }

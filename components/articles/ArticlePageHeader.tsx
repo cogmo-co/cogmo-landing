@@ -1,6 +1,6 @@
 export default function ArticlePageHeader() {
   return (
-    <section className="border-b border-hairline bg-white py-5 md:py-7">
+    <section className="border-b border-hairline bg-white py-20 md:py-28">
       <div className="mx-auto max-w-5xl px-6 text-center">
         <p className="text-sm font-semibold uppercase tracking-[0.2em] text-primary">
           Articles

@@ -3,6 +3,7 @@
  * 원본: https://www.cogmo.life/about.html
  */
 import Image from "next/image";
+import CTASection from "@/components/CTASection";
 
 const CARE_GAP = [
   { tag: "SENIOR", title: "시니어", desc: "병원 중심의 일회성 평가로 인해 일상 속 미세한 초기 변화(경도인지저하)를 놓치고 방치되는 경우가 많습니다." },
@@ -36,7 +37,7 @@ const ACHIEVEMENTS = [
 export default function AboutPage() {
   return (
     <>
-      <section className="border-b border-hairline bg-white py-5 md:py-7">
+      <section className="border-b border-hairline bg-white py-20 md:py-28">
         <div className="mx-auto max-w-5xl px-6 text-center">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-primary">
             About Cogmo
@@ -45,7 +46,8 @@ export default function AboutPage() {
             브랜드 소개
           </h1>
           <p className="mt-5 text-base leading-relaxed text-body md:text-lg">
-            초고령 시대, 인지건강 관리의 새로운 기준을 만들겠습니다.
+            초고령 시대, 인지건강 관리의{" "}
+            <span className="block md:inline">새로운 기준을 만들겠습니다.</span>
           </p>
         </div>
       </section>
@@ -103,10 +105,12 @@ export default function AboutPage() {
               The Care Gap
             </p>
             <h2 className="mt-4 text-3xl font-bold leading-tight text-ink md:text-4xl">
-              현장에서 발생하는 <span className="text-primary">3중 관리 공백</span>
+              현장에서 발생하는{" "}
+              <span className="block text-primary md:inline">3중 관리 공백</span>
             </h2>
             <p className="mt-4 text-body">
-              사후 진단 중심 체계가 놓치는 세 영역의 공백을 해결합니다.
+              사후 진단 중심 체계가 놓치는{" "}
+              <span className="block md:inline">세 영역의 공백을 해결합니다.</span>
             </p>
           </div>
           <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-3">
@@ -132,7 +136,9 @@ export default function AboutPage() {
             </p>
             <h2 className="mt-4 text-3xl font-bold leading-tight text-ink md:text-4xl">
               진단이 아닌{" "}
-              <span className="text-primary">&apos;일상 속 조기 발견&apos;</span>으로
+              <span className="block md:inline">
+                <span className="text-primary">&apos;일상 속 조기 발견&apos;</span>으로
+              </span>
             </h2>
           </div>
           <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2">
@@ -215,7 +221,7 @@ export default function AboutPage() {
             </p>
             <h2 className="mt-4 text-3xl font-bold leading-tight text-ink md:text-4xl">
               진입장벽 구축:{" "}
-              <span className="text-primary">기술 특허 및 주요 성과</span>
+              <span className="block text-primary md:inline">기술 특허 및 주요 성과</span>
             </h2>
           </div>
           <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-3">
@@ -232,32 +238,12 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="bg-primary py-40 text-white">
-        <div className="mx-auto max-w-3xl px-6 text-center">
-          <h2 className="text-3xl font-bold leading-tight md:text-4xl">
-            초고령 시대, 함께 새로운 기준을 만들어갑니다
-          </h2>
-          <p className="mt-5 text-lg text-white/80">
-            기관 도입, 협력 제안, 공공사업 참여 — 어떤 형태든 편하게 문의주세요.
-          </p>
-          <div className="mt-10 flex flex-wrap justify-center gap-3">
-            <a
-              href="https://www.cogmo.life/contact.html"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-lg bg-white px-7 py-3.5 font-medium text-primary transition hover:bg-white/90"
-            >
-              협력 · 도입 문의
-            </a>
-            <a
-              href="mailto:official@cogmo.life"
-              className="rounded-lg border border-white/60 px-7 py-3.5 font-medium text-white transition hover:bg-white hover:text-primary"
-            >
-              이메일로 연락
-            </a>
-          </div>
-        </div>
-      </section>
+      <CTASection
+        title="초고령 시대, 함께 새로운 기준을 만들어갑니다"
+        description="기관 도입, 협력 제안, 공공사업 참여 — 어떤 형태든 편하게 문의주세요."
+        primaryAction={{ label: "협력 · 도입 문의", href: "/contact" }}
+        secondaryAction={{ label: "이메일로 연락", href: "mailto:official@cogmo.life" }}
+      />
     </>
   );
 }
