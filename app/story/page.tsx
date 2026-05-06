@@ -2,6 +2,7 @@
  * 코그모스토리 페이지
  * 원본: https://www.cogmo.life/story.html
  */
+import CTASection from "@/components/CTASection";
 
 const CATEGORIES = [
   { tag: "NEWS", title: "보도자료", desc: "주요 언론에 소개된 코그모의 기사 및 보도자료를 모아 전해드립니다." },
@@ -34,7 +35,8 @@ export default function StoryPage() {
             코그모스토리
           </h1>
           <p className="mt-5 text-base leading-relaxed text-body md:text-lg">
-            현장 이야기, 보도자료, 파트너십 소식을 한 곳에서 만나보세요.
+            현장 이야기, 보도자료, 파트너십 소식을{" "}
+            <span className="block md:inline">한 곳에서 만나보세요.</span>
           </p>
         </div>
       </section>
@@ -50,8 +52,8 @@ export default function StoryPage() {
               코그모의 <span className="text-primary">소식을 전합니다</span>
             </h2>
             <p className="mt-4 text-body">
-              보도자료, 현장 이야기, 파트너십 소식을 한 곳에서 확인하실 수
-              있습니다.
+              보도자료, 현장 이야기, 파트너십 소식을{" "}
+              <span className="block md:inline">한 곳에서 확인하실 수 있습니다.</span>
             </p>
           </div>
           <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-3">
@@ -109,32 +111,12 @@ export default function StoryPage() {
         </div>
       </section>
 
-      <section className="bg-primary py-40 text-white">
-        <div className="mx-auto max-w-3xl px-6 text-center">
-          <h2 className="text-3xl font-bold leading-tight md:text-4xl">
-            코그모의 다음 걸음을 함께하실 분을 찾습니다
-          </h2>
-          <p className="mt-5 text-lg text-white/80">
-            기관 도입, 파트너십, 미디어 문의 — 무엇이든 편하게 연락주세요.
-          </p>
-          <div className="mt-10 flex flex-wrap justify-center gap-3">
-            <a
-              href="https://www.cogmo.life/contact.html"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-lg bg-white px-7 py-3.5 font-medium text-primary transition hover:bg-white/90"
-            >
-              협력 · 도입 문의
-            </a>
-            <a
-              href="mailto:official@cogmo.life"
-              className="rounded-lg border border-white/60 px-7 py-3.5 font-medium text-white transition hover:bg-white hover:text-primary"
-            >
-              미디어 · 보도자료 문의
-            </a>
-          </div>
-        </div>
-      </section>
+      <CTASection
+        title={<>코그모의 다음 걸음을{" "}<span className="block md:inline">함께하실 분을 찾습니다</span></>}
+        description={<>기관 도입, 파트너십, 미디어 문의{" "}<span className="block md:inline">— 무엇이든 편하게 연락주세요.</span></>}
+        primaryAction={{ label: "협력 · 도입 문의", href: "/contact" }}
+        secondaryAction={{ label: "미디어 · 보도자료 문의", href: "mailto:official@cogmo.life" }}
+      />
     </>
   );
 }

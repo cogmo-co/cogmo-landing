@@ -3,6 +3,7 @@
  * 원본: https://www.cogmo.life/healthcare-senior.html
  */
 import ImageCarousel from "@/components/ImageCarousel";
+import CTASection from "@/components/CTASection";
 
 const PARTNERS = [
   "제이액터스 시니어 모델에이전시",
@@ -38,12 +39,15 @@ export default function HealthcareSeniorPage() {
             Program · Senior Group
           </p>
           <h1 className="mt-6 text-4xl font-black leading-[1.15] tracking-tight text-ink md:text-5xl">
-            시니어 그룹 건강관리 프로그램
+            시니어 그룹{" "}
+            <span className="block md:inline">건강관리 프로그램</span>
           </h1>
           <p className="mt-5 text-base leading-relaxed text-body md:text-lg">
-            문화센터·복지관·시니어 커뮤니티를 위한 전문 운동 프로그램
-            <br />
-            정적인 &apos;노인 체조&apos;를 넘어, 지금의 액티브 시니어에게 맞는 운동.
+            문화센터·복지관·시니어 커뮤니티를 위한{" "}
+            <span className="block md:inline">전문 운동 프로그램</span>
+            {/* <br /> */}
+            정적인 &apos;노인 체조&apos;를 넘어,
+            지금의 액티브 시니어에게 맞는 운동.
           </p>
         </div>
       </section>
@@ -67,8 +71,10 @@ export default function HealthcareSeniorPage() {
               Active Senior Care
             </p>
             <h2 className="mt-4 text-3xl font-bold leading-tight text-ink md:text-4xl">
-              지금의 시니어는 <span className="text-primary">young-old</span>
-              입니다
+              지금의 시니어는{" "}
+              <span className="block md:inline">
+                <span className="text-primary">young-old</span>입니다
+              </span>
             </h2>
             <p className="mt-5 leading-relaxed text-body">
               코그모는 복지관, 문화센터, 시니어 커뮤니티의 회원들과 시니어
@@ -154,35 +160,12 @@ export default function HealthcareSeniorPage() {
         </div>
       </section>
 
-      <section className="bg-primary py-40 text-white">
-        <div className="mx-auto max-w-3xl px-6 text-center">
-          <h2 className="text-3xl font-bold leading-tight md:text-4xl">
-            액티브 시니어의 일상, 함께 설계해드립니다
-          </h2>
-          <p className="mt-5 text-lg text-white/80">
-            복지관·문화센터·시니어 커뮤니티 단위의 정기 프로그램부터
-            단체세미나까지, 규모에 맞춰 제안드릴게요.
-          </p>
-          <div className="mt-10 flex flex-wrap justify-center gap-3">
-            <a
-              href="https://www.cogmo.life/contact.html"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-lg bg-white px-7 py-3.5 font-medium text-primary transition hover:bg-white/90"
-            >
-              프로그램 문의하기
-            </a>
-            <a
-              href="https://www.cogmo.life/contact.html"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-lg border border-white/60 px-7 py-3.5 font-medium text-white transition hover:bg-white hover:text-primary"
-            >
-              기관 도입 상담
-            </a>
-          </div>
-        </div>
-      </section>
+      <CTASection
+        title={<>액티브 시니어의 일상,{" "}<span className="block md:inline">함께 설계해드립니다</span></>}
+        description="복지관·문화센터·시니어 커뮤니티 단위의 정기 프로그램부터 단체세미나까지, 규모에 맞춰 제안드릴게요."
+        primaryAction={{ label: "프로그램 문의하기", href: "/contact" }}
+        secondaryAction={{ label: "기관 도입 상담", href: "/contact" }}
+      />
     </>
   );
 }

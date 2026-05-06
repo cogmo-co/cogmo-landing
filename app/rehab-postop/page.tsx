@@ -3,6 +3,7 @@
  * 원본: https://www.cogmo.life/rehab-postop.html
  */
 import ImageCarousel from "@/components/ImageCarousel";
+import CTASection from "@/components/CTASection";
 
 const MODULES = [
   { num: "01", title: "척추 수술 후 재활", desc: "디스크·협착증·척추 고정술 이후 코어 안정성 회복과 통증 관리를 위한 단계별 운동." },
@@ -26,12 +27,15 @@ export default function RehabPostopPage() {
             Program · Musculoskeletal Rehab
           </p>
           <h1 className="mt-6 text-4xl font-black leading-[1.15] tracking-tight text-ink md:text-5xl">
-            근골격계 방문재활 프로그램
+            근골격계{" "}
+            <span className="block md:inline">방문재활 프로그램</span>
           </h1>
           <p className="mt-5 text-base leading-relaxed text-body md:text-lg">
-            척추·관절·인공관절 수술 후 재활 운동 전문 방문 프로그램
+            척추·관절·인공관절 수술 후 재활 운동 전문{" "}
+            <span className="block md:inline">방문 프로그램</span>
             <br />
-            퇴원 직후부터 일상 복귀까지, 전문 치료사가 끊김 없이 함께합니다.
+            퇴원 직후부터 일상 복귀까지, 전문 치료사가{" "}
+            <span className="block md:inline">끊김 없이 함께합니다.</span>
           </p>
         </div>
       </section>
@@ -60,12 +64,12 @@ export default function RehabPostopPage() {
               수술 후 빠른 일상 복귀를 위한{" "}
               <span className="text-primary">근골격계 방문재활</span>
             </h2>
-            <p className="mt-5 leading-[1.05] text-body">
+            <p className="mt-5 leading-relaxed text-body">
               척추 수술, 관절 수술, 인공관절 치환술 후 재활 — 수술 이후 가장
               중요한 시기에 전문 치료사가 직접 방문하여 근골격계 재활 운동을
               제공합니다.
             </p>
-            <p className="mt-4 leading-[1.05] text-body">
+            <p className="mt-4 leading-relaxed text-body">
               수술 부위의 안정적 회복과 일상 기능 복귀를 동시에 목표로, 단계별
               운동 프로그램을 설계합니다. 보호자의 돌봄 부담도 덜어드립니다.
             </p>
@@ -123,35 +127,12 @@ export default function RehabPostopPage() {
         </div>
       </section>
 
-      <section className="bg-primary py-40 text-white">
-        <div className="mx-auto max-w-3xl px-6 text-center">
-          <h2 className="text-3xl font-bold leading-tight md:text-4xl">
-            수술 후 회복, 지금 함께 시작해보세요
-          </h2>
-          <p className="mt-5 text-lg text-white/80">
-            방문재활 일정 예약부터 병원·기관 협력 상담까지, 편한 방법으로
-            연락주세요.
-          </p>
-          <div className="mt-10 flex flex-wrap justify-center gap-3">
-            <a
-              href="https://www.cogmo.life/contact.html"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-lg bg-white px-7 py-3.5 font-medium text-primary transition hover:bg-white/90"
-            >
-              일정 예약하기
-            </a>
-            <a
-              href="https://www.cogmo.life/contact.html"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-lg border border-white/60 px-7 py-3.5 font-medium text-white transition hover:bg-white hover:text-primary"
-            >
-              기관 도입 문의
-            </a>
-          </div>
-        </div>
-      </section>
+      <CTASection
+        title="수술 후 회복, 지금 함께 시작해보세요"
+        description="방문재활 일정 예약부터 병원·기관 협력 상담까지, 편한 방법으로 연락주세요."
+        primaryAction={{ label: "일정 예약하기", href: "/contact" }}
+        secondaryAction={{ label: "기관 도입 문의", href: "/contact" }}
+      />
     </>
   );
 }

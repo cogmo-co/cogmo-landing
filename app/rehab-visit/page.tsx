@@ -4,6 +4,7 @@
  * Nav/Footer는 app/layout.tsx에서 래핑됨
  */
 import ImageCarousel from "@/components/ImageCarousel";
+import CTASection from "@/components/CTASection";
 
 const MODULES = [
   { num: "01", title: "근감소증 예방", desc: "하지 중심 저항성 운동으로 나이와 함께 빠르게 줄어드는 근육량을 유지·회복합니다." },
@@ -38,9 +39,11 @@ export default function RehabVisitPage() {
             시니어 방문 재활 프로그램
           </h1>
           <p className="mt-5 text-base leading-relaxed text-body md:text-lg">
-            근감소증, 체력증진, 낙상예방, 보행 - 시니어에 최적화된 방문 재활
+            근감소증, 체력증진, 낙상예방, 보행{" "}
+            <span className="block md:inline">- 시니어에 최적화된 방문 재활</span>
             <br />
-            전문치료사가 직접 방문해 근력∙균형∙보행을 1:1로 회복시켜 드립니다.
+            전문치료사가 직접 방문해 근력∙균형∙보행을{" "}
+            <span className="block md:inline">1:1로 회복시켜 드립니다.</span>
           </p>
         </div>
       </section>
@@ -67,14 +70,17 @@ export default function RehabVisitPage() {
               Senior Visit Rehabilitation
             </p>
             <h2 className="mt-4 text-3xl font-bold leading-tight text-ink md:text-4xl">
-              시니어에 최적화된 <span className="text-primary">방문 재활 운동</span>
+              시니어에 최적화된{" "}
+              <span className="block text-primary md:inline">방문 재활 운동</span>
             </h2>
             <p className="mt-5 leading-relaxed text-body">
               근감소증, 체력 저하, 낙상 위험, 보행 불안정 —
               <br />
-              시니어가 가장 자주 겪는 신체 기능 저하에 집중한 방문 재활 프로그램입니다.
+              시니어가 가장 자주 겪는 신체 기능 저하에 집중한{" "}
+              <span className="block md:inline">방문 재활 프로그램입니다.</span>
               <br />
-              전문 치료사가 직접 가정·기관을 방문하여 1:1 맞춤 운동을 제공합니다.
+              전문 치료사가 직접 가정·기관을 방문하여{" "}
+              <span className="block md:inline">1:1 맞춤 운동을 제공합니다.</span>
             </p>
             <p className="mt-4 leading-relaxed text-body">
               FEA 기능 평가 결과를 기반으로 개인별 운동처방을 설계하고, 지속적인
@@ -158,34 +164,12 @@ export default function RehabVisitPage() {
       </section>
 
       {/* Final CTA */}
-      <section className="bg-primary py-40 text-white">
-        <div className="mx-auto max-w-3xl px-6 text-center">
-          <h2 className="text-3xl font-bold leading-tight md:text-4xl">
-            지금 부모님의 회복을 시작해보세요
-          </h2>
-          <p className="mt-5 text-lg text-white/80">
-            방문재활 일정 예약부터 기관 도입 상담까지, 편한 방법으로 연락주세요.
-          </p>
-          <div className="mt-10 flex flex-wrap justify-center gap-3">
-            <a
-              href="https://www.cogmo.life/contact.html"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-lg bg-white px-7 py-3.5 font-medium text-primary transition hover:bg-white/90"
-            >
-              일정 예약하기
-            </a>
-            <a
-              href="https://www.cogmo.life/contact.html"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-lg border border-white/60 px-7 py-3.5 font-medium text-white transition hover:bg-white hover:text-primary"
-            >
-              기관 도입 문의
-            </a>
-          </div>
-        </div>
-      </section>
+      <CTASection
+        title="지금 부모님의 회복을 시작해보세요"
+        description={<>방문재활 일정 예약부터 기관 도입 상담까지,{" "}<span className="block md:inline">편한 방법으로 연락주세요.</span></>}
+        primaryAction={{ label: "일정 예약하기", href: "/contact" }}
+        secondaryAction={{ label: "기관 도입 문의", href: "/contact" }}
+      />
     </>
   );
 }

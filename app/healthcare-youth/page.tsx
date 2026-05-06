@@ -3,6 +3,7 @@
  * 원본: https://www.cogmo.life/healthcare-youth.html
  */
 import ImageCarousel from "@/components/ImageCarousel";
+import CTASection from "@/components/CTASection";
 
 const PARTNERS = [
   "롯데백화점 문화센터",
@@ -41,9 +42,11 @@ export default function HealthcareYouthPage() {
             유소년 건강관리 프로그램
           </h1>
           <p className="mt-5 text-base leading-relaxed text-body md:text-lg">
-            키 성장 체조, 체형 교정, 근력 증진 — 건강한 성장을 위한 그룹 운동
+            키 성장 체조, 체형 교정, 근력 증진{" "}
+            <span className="block md:inline">— 건강한 성장을 위한 그룹 운동</span>
             <br />
-            체격·능력 편차가 큰 아이들도 각자의 수준으로 함께 운동할 수 있도록 설계.
+            체격·능력 편차가 큰 아이들도 각자의 수준으로{" "}
+            <span className="block md:inline">함께 운동할 수 있도록 설계.</span>
           </p>
         </div>
       </section>
@@ -72,15 +75,14 @@ export default function HealthcareYouthPage() {
             </p>
             <h2 className="mt-4 text-3xl font-bold leading-tight text-ink md:text-4xl">
               초등 저학년부터 고등학생까지,{" "}
-              <span className="text-primary">편차 큰 아이들 모두에게</span>
+              <span className="block text-primary md:inline">편차 큰 아이들 모두에게</span>
             </h2>
             <p className="mt-5 leading-relaxed text-body">
               코그모의 유소년 프로그램은{" "}
               <strong className="text-ink">
                 롯데백화점 문화센터, 키즈모델에이전시, 케이팝아카데미 연습생
               </strong>{" "}
-              등 다양한 단체의 아이들에게
-              <br />
+              <span className="block md:inline">등 다양한 단체의 아이들에게</span>
               <strong className="text-ink">
                 키 성장, 자세 교정, 근력 강화 운동 프로그램
               </strong>
@@ -157,35 +159,12 @@ export default function HealthcareYouthPage() {
         </div>
       </section>
 
-      <section className="bg-primary py-40 text-white">
-        <div className="mx-auto max-w-3xl px-6 text-center">
-          <h2 className="text-3xl font-bold leading-tight md:text-4xl">
-            아이들의 건강한 성장, 함께 시작합니다
-          </h2>
-          <p className="mt-5 text-lg text-white/80">
-            문화센터·아카데미·학교 단위의 단체 프로그램을 체형·연령·목표에
-            맞춰 설계해드립니다.
-          </p>
-          <div className="mt-10 flex flex-wrap justify-center gap-3">
-            <a
-              href="https://www.cogmo.life/contact.html"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-lg bg-white px-7 py-3.5 font-medium text-primary transition hover:bg-white/90"
-            >
-              프로그램 문의하기
-            </a>
-            <a
-              href="https://www.cogmo.life/contact.html"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-lg border border-white/60 px-7 py-3.5 font-medium text-white transition hover:bg-white hover:text-primary"
-            >
-              기관 도입 상담
-            </a>
-          </div>
-        </div>
-      </section>
+      <CTASection
+        title={<>아이들의 건강한 성장,{" "}<span className="block md:inline">함께 시작합니다</span></>}
+        description="문화센터·아카데미·학교 단위의 단체 프로그램을 체형·연령·목표에 맞춰 설계해드립니다."
+        primaryAction={{ label: "프로그램 문의하기", href: "/contact" }}
+        secondaryAction={{ label: "기관 도입 상담", href: "/contact" }}
+      />
     </>
   );
 }

@@ -7,7 +7,7 @@ export default function DownloadPage() {
   return (
     <>
       {/* 헤더 — 다른 페이지와 동일 패턴 */}
-      <section className="border-b border-hairline bg-white py-5 md:py-7">
+      <section className="border-b border-hairline bg-white py-20 md:py-28">
         <div className="mx-auto max-w-5xl px-6 text-center">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-primary">
             Download
@@ -24,10 +24,10 @@ export default function DownloadPage() {
       {/* 본문 */}
       <div className="mx-auto max-w-3xl px-6 py-20 text-center md:py-28">
         <h2 className="text-2xl font-bold text-ink md:text-3xl">
-          런칭 준비중입니다.
+          재정비 중입니다.
         </h2>
         <p className="mt-4 text-base text-muted md:text-lg">
-          곧 만나뵙겠습니다.
+          더 나은 모습으로 곧 돌아오겠습니다.
         </p>
 
         <div className="mt-12 flex flex-col items-center justify-center gap-3 sm:flex-row">

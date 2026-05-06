@@ -3,6 +3,7 @@
  * 원본: https://www.cogmo.life/healthcare-corporate.html
  */
 import ImageCarousel from "@/components/ImageCarousel";
+import CTASection from "@/components/CTASection";
 
 const CLIENTS = [
   "인천지방해양청",
@@ -35,10 +36,12 @@ export default function HealthcareCorporatePage() {
             Program · Corporate Wellness
           </p>
           <h1 className="mt-6 text-4xl font-black leading-[1.15] tracking-tight text-ink md:text-5xl">
-            기업 임직원 건강관리 프로그램
+            기업 임직원{" "}
+            <span className="block md:inline">건강관리 프로그램</span>
           </h1>
           <p className="mt-5 text-base leading-relaxed text-body md:text-lg">
-            오피스 스트레칭, 체형 교정 원데이 클래스, 건강 관리 세미나
+            오피스 스트레칭, 체형 교정 원데이 클래스,{" "}
+            <span className="block md:inline">건강 관리 세미나</span>
             <br />
             사무실 현장에 맞춘 자세·통증·업무 집중 개선 솔루션.
           </p>
@@ -67,12 +70,15 @@ export default function HealthcareCorporatePage() {
             </p>
             <h2 className="mt-4 text-3xl font-bold leading-tight text-ink md:text-4xl">
               책상 앞 8시간,{" "}
-              <span className="text-primary">몸이 보내는 신호</span>
+              <span className="block text-primary md:inline">몸이 보내는 신호</span>
             </h2>
             <p className="mt-5 leading-relaxed text-body">
               장시간 컴퓨터 앞에 앉아 있는 사무직 임직원에게 가장 먼저 나타나는
               것은 어깨 결림, 목·허리 통증, 눈의 피로 그리고 만성적인 자세
-              불균형입니다. 코그모는 이런 현장의 고충을 바로 해결하기 위해{" "}
+              불균형입니다.
+            </p>
+            <p className="mt-4 leading-relaxed text-body">
+              코그모는 이런 현장의 고충을 바로 해결하기 위해{" "}
               <strong className="text-ink">자세 교정 · 교정 운동 · 오피스 스트레칭</strong>을 중심으로 한
               <br />
               임직원 맞춤 헬스케어 프로그램을 제공합니다.
@@ -146,35 +152,12 @@ export default function HealthcareCorporatePage() {
         </div>
       </section>
 
-      <section className="bg-primary py-40 text-white">
-        <div className="mx-auto max-w-3xl px-6 text-center">
-          <h2 className="text-3xl font-bold leading-tight md:text-4xl">
-            임직원 건강, 기업의 자산입니다
-          </h2>
-          <p className="mt-5 text-lg text-white/80">
-            원데이 특강부터 정기 단체 프로그램까지, 기업 규모와 예산에 맞춰
-            제안드릴게요.
-          </p>
-          <div className="mt-10 flex flex-wrap justify-center gap-3">
-            <a
-              href="https://www.cogmo.life/contact.html"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-lg bg-white px-7 py-3.5 font-medium text-primary transition hover:bg-white/90"
-            >
-              프로그램 문의하기
-            </a>
-            <a
-              href="https://www.cogmo.life/contact.html"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-lg border border-white/60 px-7 py-3.5 font-medium text-white transition hover:bg-white hover:text-primary"
-            >
-              제안서 요청
-            </a>
-          </div>
-        </div>
-      </section>
+      <CTASection
+        title="임직원 건강, 기업의 자산입니다"
+        description="원데이 특강부터 정기 단체 프로그램까지, 기업 규모와 예산에 맞춰 제안드릴게요."
+        primaryAction={{ label: "프로그램 문의하기", href: "/contact" }}
+        secondaryAction={{ label: "제안서 요청", href: "/contact" }}
+      />
     </>
   );
 }
