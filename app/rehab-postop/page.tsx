@@ -27,12 +27,15 @@ export default function RehabPostopPage() {
             Program · Musculoskeletal Rehab
           </p>
           <h1 className="mt-6 text-4xl font-black leading-[1.15] tracking-tight text-ink md:text-5xl">
-            근골격계 방문재활 프로그램
+            근골격계{" "}
+            <span className="block md:inline">방문재활 프로그램</span>
           </h1>
           <p className="mt-5 text-base leading-relaxed text-body md:text-lg">
-            척추·관절·인공관절 수술 후 재활 운동 전문 방문 프로그램
+            척추·관절·인공관절 수술 후 재활 운동 전문{" "}
+            <span className="block md:inline">방문 프로그램</span>
             <br />
-            퇴원 직후부터 일상 복귀까지, 전문 치료사가 끊김 없이 함께합니다.
+            퇴원 직후부터 일상 복귀까지, 전문 치료사가{" "}
+            <span className="block md:inline">끊김 없이 함께합니다.</span>
           </p>
         </div>
       </section>
@@ -61,12 +64,12 @@ export default function RehabPostopPage() {
               수술 후 빠른 일상 복귀를 위한{" "}
               <span className="text-primary">근골격계 방문재활</span>
             </h2>
-            <p className="mt-5 leading-[1.05] text-body">
+            <p className="mt-5 leading-relaxed text-body">
               척추 수술, 관절 수술, 인공관절 치환술 후 재활 — 수술 이후 가장
               중요한 시기에 전문 치료사가 직접 방문하여 근골격계 재활 운동을
               제공합니다.
             </p>
-            <p className="mt-4 leading-[1.05] text-body">
+            <p className="mt-4 leading-relaxed text-body">
               수술 부위의 안정적 회복과 일상 기능 복귀를 동시에 목표로, 단계별
               운동 프로그램을 설계합니다. 보호자의 돌봄 부담도 덜어드립니다.
             </p>

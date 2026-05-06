@@ -39,9 +39,11 @@ export default function RehabVisitPage() {
             시니어 방문 재활 프로그램
           </h1>
           <p className="mt-5 text-base leading-relaxed text-body md:text-lg">
-            근감소증, 체력증진, 낙상예방, 보행 - 시니어에 최적화된 방문 재활
+            근감소증, 체력증진, 낙상예방, 보행{" "}
+            <span className="block md:inline">- 시니어에 최적화된 방문 재활</span>
             <br />
-            전문치료사가 직접 방문해 근력∙균형∙보행을 1:1로 회복시켜 드립니다.
+            전문치료사가 직접 방문해 근력∙균형∙보행을{" "}
+            <span className="block md:inline">1:1로 회복시켜 드립니다.</span>
           </p>
         </div>
       </section>
@@ -68,14 +70,17 @@ export default function RehabVisitPage() {
               Senior Visit Rehabilitation
             </p>
             <h2 className="mt-4 text-3xl font-bold leading-tight text-ink md:text-4xl">
-              시니어에 최적화된 <span className="text-primary">방문 재활 운동</span>
+              시니어에 최적화된{" "}
+              <span className="block text-primary md:inline">방문 재활 운동</span>
             </h2>
             <p className="mt-5 leading-relaxed text-body">
               근감소증, 체력 저하, 낙상 위험, 보행 불안정 —
               <br />
-              시니어가 가장 자주 겪는 신체 기능 저하에 집중한 방문 재활 프로그램입니다.
+              시니어가 가장 자주 겪는 신체 기능 저하에 집중한{" "}
+              <span className="block md:inline">방문 재활 프로그램입니다.</span>
               <br />
-              전문 치료사가 직접 가정·기관을 방문하여 1:1 맞춤 운동을 제공합니다.
+              전문 치료사가 직접 가정·기관을 방문하여{" "}
+              <span className="block md:inline">1:1 맞춤 운동을 제공합니다.</span>
             </p>
             <p className="mt-4 leading-relaxed text-body">
               FEA 기능 평가 결과를 기반으로 개인별 운동처방을 설계하고, 지속적인
@@ -161,7 +166,7 @@ export default function RehabVisitPage() {
       {/* Final CTA */}
       <CTASection
         title="지금 부모님의 회복을 시작해보세요"
-        description="방문재활 일정 예약부터 기관 도입 상담까지, 편한 방법으로 연락주세요."
+        description={<>방문재활 일정 예약부터 기관 도입 상담까지,{" "}<span className="block md:inline">편한 방법으로 연락주세요.</span></>}
         primaryAction={{ label: "일정 예약하기", href: "/contact" }}
         secondaryAction={{ label: "기관 도입 문의", href: "/contact" }}
       />

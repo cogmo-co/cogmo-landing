@@ -57,7 +57,8 @@ function CTAButtonView({
         title="준비중"
         className={`${baseCls} ${disabledCls} cursor-not-allowed`}
       >
-        {button.label} (준비중)
+        {/* {button.label}  */}
+        점검중
       </button>
     );
   }
