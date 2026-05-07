@@ -11,7 +11,7 @@ interface CTASectionProps {
   title: React.ReactNode;
   description: React.ReactNode;
   primaryAction: CTAButton;
-  secondaryAction: CTAButton;
+  secondaryAction?: CTAButton;
 }
 
 export default function CTASection({
@@ -25,9 +25,15 @@ export default function CTASection({
       <div className="mx-auto max-w-3xl px-6 text-center">
         <h2 className="text-3xl font-bold leading-tight md:text-4xl">{title}</h2>
         <p className="mt-5 text-lg text-white/80">{description}</p>
-        <div className="mx-auto mt-10 grid w-fit grid-cols-1 gap-3 sm:grid-cols-2">
+        <div
+          className={`mx-auto mt-10 grid w-fit grid-cols-1 gap-3 ${
+            secondaryAction ? "sm:grid-cols-2" : ""
+          }`}
+        >
           <CTAButtonView button={primaryAction} variant="primary" />
-          <CTAButtonView button={secondaryAction} variant="secondary" />
+          {secondaryAction && (
+            <CTAButtonView button={secondaryAction} variant="secondary" />
+          )}
         </div>
       </div>
     </section>

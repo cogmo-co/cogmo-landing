@@ -130,8 +130,7 @@ export default function RehabPostopPage() {
       <CTASection
         title="수술 후 회복, 지금 함께 시작해보세요"
         description="방문재활 일정 예약부터 병원·기관 협력 상담까지, 편한 방법으로 연락주세요."
-        primaryAction={{ label: "일정 예약하기", href: "/contact" }}
-        secondaryAction={{ label: "기관 도입 문의", href: "/contact" }}
+        primaryAction={{ label: "서비스 도입 문의", href: "/contact" }}
       />
     </>
   );

@@ -162,8 +162,7 @@ export default function HealthcareYouthPage() {
       <CTASection
         title={<>아이들의 건강한 성장,{" "}<span className="block md:inline">함께 시작합니다</span></>}
         description="문화센터·아카데미·학교 단위의 단체 프로그램을 체형·연령·목표에 맞춰 설계해드립니다."
-        primaryAction={{ label: "프로그램 문의하기", href: "/contact" }}
-        secondaryAction={{ label: "기관 도입 상담", href: "/contact" }}
+        primaryAction={{ label: "프로그램 문의", href: "/contact" }}
       />
     </>
   );

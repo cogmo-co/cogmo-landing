@@ -162,8 +162,8 @@ export default function HealthcareSeniorPage() {
 
       <CTASection
         title={<>액티브 시니어의 일상,{" "}<span className="block md:inline">함께 설계해드립니다</span></>}
-        description="복지관·문화센터·시니어 커뮤니티 단위의 정기 프로그램부터 단체세미나까지, 규모에 맞춰 제안드릴게요."
-        primaryAction={{ label: "프로그램 문의하기", href: "/contact" }}
+        description={<>복지관·문화센터·시니어 커뮤니티 단위의 정기 프로그램부터 단체세미나까지,<br />규모에 맞춰 제안드릴게요.</>}
+        primaryAction={{ label: "프로그램 문의", href: "/contact" }}
         secondaryAction={{ label: "기관 도입 상담", href: "/contact" }}
       />
     </>

@@ -73,9 +73,9 @@ export default function HealthcareCorporatePage() {
               <span className="block text-primary md:inline">몸이 보내는 신호</span>
             </h2>
             <p className="mt-5 leading-relaxed text-body">
-              장시간 컴퓨터 앞에 앉아 있는 사무직 임직원에게 가장 먼저 나타나는
-              것은 어깨 결림, 목·허리 통증, 눈의 피로 그리고 만성적인 자세
-              불균형입니다.
+              장시간 컴퓨터 앞에 앉아 있는 사무직 임직원에게 가장 먼저 나타나는 것은
+              <br className="hidden md:inline" />
+              {" "}어깨 결림, 목·허리 통증, 눈의 피로 그리고 만성적인 자세 불균형입니다.
             </p>
             <p className="mt-4 leading-relaxed text-body">
               코그모는 이런 현장의 고충을 바로 해결하기 위해{" "}
@@ -155,7 +155,7 @@ export default function HealthcareCorporatePage() {
       <CTASection
         title="임직원 건강, 기업의 자산입니다"
         description="원데이 특강부터 정기 단체 프로그램까지, 기업 규모와 예산에 맞춰 제안드릴게요."
-        primaryAction={{ label: "프로그램 문의하기", href: "/contact" }}
+        primaryAction={{ label: "프로그램 문의", href: "/contact" }}
         secondaryAction={{ label: "제안서 요청", href: "/contact" }}
       />
     </>
