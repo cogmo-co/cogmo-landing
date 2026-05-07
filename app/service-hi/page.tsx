@@ -73,7 +73,7 @@ export default function ServiceHiPage() {
               자녀·보호자와 공유됩니다.
             </p>
             <a
-              href="https://hi.cogmo.life"
+              href="/check"
               target="_blank"
               rel="noopener noreferrer"
               className="mt-10 inline-block rounded-lg bg-primary px-7 py-3.5 font-medium text-white transition hover:bg-primary-dark"
@@ -236,7 +236,7 @@ export default function ServiceHiPage() {
       <CTASection
         title="인지건강, 진단 이전에 시작해보세요"
         description={<>개인은 무료 검사로, 기관은 통합 대시보드로{" "}<span className="block md:inline">— 가장 빠르게 시작하는 방법을 선택하세요.</span></>}
-        primaryAction={{ label: "무료 검사 시작", href: "https://hi.cogmo.life", disabled: true }}
+        primaryAction={{ label: "무료 검사 시작", href: "/check", external: true }}
         secondaryAction={{ label: "기관 도입 문의", href: "/contact" }}
       />
     </>

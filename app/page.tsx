@@ -7,6 +7,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import HeroPhoneMockup from "@/components/HeroPhoneMockup";
+import CTASection from "@/components/CTASection";
 
 export default function Home() {
   return (
@@ -31,7 +32,7 @@ export default function Home() {
             </p>
             <div className="mt-10 flex flex-wrap justify-center gap-3">
               <a
-                href="https://www.cogmo.life/service-hi.html"
+                href="/check"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="rounded-lg bg-primary px-7 py-3.5 font-medium text-white transition hover:bg-primary-dark"
@@ -347,34 +348,12 @@ export default function Home() {
         {/* ==========================================================
             8. Final CTA
             ========================================================== */}
-        <section id="final-cta" className="bg-primary py-24 text-white">
-          <div className="mx-auto max-w-3xl px-6 text-center">
-            <h3 className="text-3xl font-bold leading-tight md:text-4xl">
-              지금 바로 시작해보세요
-            </h3>
-            <p className="mt-5 text-lg text-white/80">
-              기관 담당자는 도입 상담을, 가족은 무료 검사부터 경험해보세요.
-            </p>
-            <div className="mt-10 flex flex-wrap justify-center gap-3">
-              <a
-                href="https://www.cogmo.life/service-hi.html"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="rounded-lg bg-white px-7 py-3.5 font-medium text-primary transition hover:bg-white/90"
-              >
-                무료 검사 시작
-              </a>
-              <a
-                href="https://www.cogmo.life/contact.html"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="rounded-lg border border-white/60 px-7 py-3.5 font-medium text-white transition hover:bg-white hover:text-primary"
-              >
-                기관 도입 문의
-              </a>
-            </div>
-          </div>
-        </section>
+        <CTASection
+          title="지금 바로 시작해보세요"
+          description="기관 담당자는 도입 상담을, 가족은 무료 검사부터 경험해보세요."
+          primaryAction={{ label: "무료 검사 시작", href: "/check", external: true }}
+          secondaryAction={{ label: "기관 도입 문의", href: "/contact" }}
+        />
     </>
   );
 }

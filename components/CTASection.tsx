@@ -69,6 +69,20 @@ function CTAButtonView({
       : "border border-white/60 text-white hover:bg-white hover:text-primary";
   const className = `${baseCls} ${variantCls}`;
 
+  // external true → 항상 새 창 (내부/외부 무관)
+  if (button.external) {
+    return (
+      <a
+        href={button.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={className}
+      >
+        {button.label}
+      </a>
+    );
+  }
+
   // 내부 경로 → Next Link (SPA 이동)
   if (button.href.startsWith("/")) {
     return (
@@ -78,13 +92,9 @@ function CTAButtonView({
     );
   }
 
-  // 외부 / mailto → a 태그
+  // mailto 등 → a 태그
   return (
-    <a
-      href={button.href}
-      {...(button.external && { target: "_blank", rel: "noopener noreferrer" })}
-      className={className}
-    >
+    <a href={button.href} className={className}>
       {button.label}
     </a>
   );

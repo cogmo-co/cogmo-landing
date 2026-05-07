@@ -21,18 +21,20 @@ export default function DownloadPage() {
         </div>
       </section>
 
-      {/* 본문 */}
-      <div className="mx-auto max-w-3xl px-6 py-20 text-center md:py-28">
-        <h2 className="text-2xl font-bold text-ink md:text-3xl">
-          재정비 중입니다.
-        </h2>
-        <p className="mt-4 text-base text-muted md:text-lg">
-          더 나은 모습으로 곧 돌아오겠습니다.
-        </p>
+      {/* 본문 — Nav/Footer 사이 빈 공간 가운데 정렬 */}
+      <div className="flex flex-1 items-center justify-center px-6 py-20 md:py-28">
+        <div className="max-w-3xl text-center">
+          <h2 className="text-2xl font-bold text-ink md:text-3xl">
+            재정비 중입니다.
+          </h2>
+          <p className="mt-4 text-base text-muted md:text-lg">
+            더 나은 모습으로 곧 돌아오겠습니다.
+          </p>
 
-        <div className="mt-12 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <StoreButton store="apple" />
-          <StoreButton store="google" />
+          <div className="mt-12 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <StoreButton store="apple" />
+            <StoreButton store="google" />
+          </div>
         </div>
       </div>
     </>
