@@ -3,10 +3,26 @@ import Script from "next/script";
 import SiteChrome from "@/components/SiteChrome";
 import "./globals.css";
 
+const SITE_TITLE = "진단 이전에 시작하는 인지건강 모니터링 | Cogmo";
+const SITE_DESCRIPTION =
+  "건강한 시니어의 인지 변화를 추적하고 초기 신호를 감지하는 디지털 인지건강 모니터링 서비스. 보호자 연계, 기관 도입 지원.";
+
 export const metadata: Metadata = {
-  title: "진단 이전에 시작하는 인지건강 모니터링 | Cogmo",
-  description:
-    "건강한 시니어의 인지 변화를 추적하고 초기 신호를 감지하는 디지털 인지건강 모니터링 서비스. 보호자 연계, 기관 도입 지원.",
+  title: SITE_TITLE,
+  description: SITE_DESCRIPTION,
+  metadataBase: new URL("https://cogmo.life"),
+  openGraph: {
+    type: "website",
+    locale: "ko_KR",
+    siteName: "Cogmo",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+  },
 };
 
 export default function RootLayout({
