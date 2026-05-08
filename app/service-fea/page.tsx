@@ -83,7 +83,7 @@ export default function ServiceFeaPage() {
             </p>
           </div>
           {/* 폰 목업 + 4장 자동 슬라이드 (4s 구간 × 4장 = 16s 주기) */}
-          <div className="relative mx-auto aspect-9/19 w-full max-w-260px animate-fade-in-zoom rounded-2rem bg-ink p-1 shadow-[0_20px_50px_rgba(0,0,0,0.22)]">
+          <div className="relative mx-auto aspect-[9/19] w-full max-w-[260px] animate-fade-in-zoom rounded-[2rem] bg-ink p-1 shadow-[0_20px_50px_rgba(0,0,0,0.22)]">
             <div className="absolute left-1/2 top-2 z-10 h-4 w-16 -translate-x-1/2 rounded-full bg-ink" />
             <div className="relative h-full overflow-hidden rounded-[1.75rem] bg-white">
               {[1, 2, 3, 4].map((n, idx) => (
@@ -222,8 +222,7 @@ export default function ServiceFeaPage() {
       <CTASection
         title="움직임 역량, 20분 만에 확인하세요"
         description="방문재활·기업 헬스케어·연구 협력 등 FEA를 현장에 도입하고자 하신다면 편하게 문의주세요."
-        primaryAction={{ label: "FEA 도입 문의", href: "/contact" }}
-        secondaryAction={{ label: "연구 · 협력 제안", href: "mailto:official@cogmo.life" }}
+        primaryAction={{ label: "서비스 문의", href: "/contact" }}
       />
     </>
   );
