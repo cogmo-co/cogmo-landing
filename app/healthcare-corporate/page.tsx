@@ -156,7 +156,6 @@ export default function HealthcareCorporatePage() {
         title="임직원 건강, 기업의 자산입니다"
         description="원데이 특강부터 정기 단체 프로그램까지, 기업 규모와 예산에 맞춰 제안드릴게요."
         primaryAction={{ label: "프로그램 문의", href: "/contact" }}
-        secondaryAction={{ label: "제안서 요청", href: "/contact" }}
       />
     </>
   );

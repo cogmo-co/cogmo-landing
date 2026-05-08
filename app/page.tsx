@@ -91,9 +91,9 @@ export default function Home() {
                   </li>
                 ))}
               </ul>
-              <a href="#" className="mt-10 inline-block rounded-lg bg-primary px-7 py-3.5 font-medium text-white transition hover:bg-primary-dark">
+              <Link href="/service-hi" className="mt-10 inline-block rounded-lg bg-primary px-7 py-3.5 font-medium text-white transition hover:bg-primary-dark">
                 자세히 보기
-              </a>
+              </Link>
             </div>
 
             {/* Dual mockup — 좌: B2B 대시보드, 우: 안녕 앱 (세로로 길게 살짝 겹침) */}
