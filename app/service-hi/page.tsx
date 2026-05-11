@@ -237,7 +237,7 @@ export default function ServiceHiPage() {
         title="인지건강, 진단 이전에 시작해보세요"
         description={<>개인은 무료 검사로, 기관은 통합 대시보드로{" "}<span className="block md:inline">— 가장 빠르게 시작하는 방법을 선택하세요.</span></>}
         primaryAction={{ label: "무료 검사 시작", href: "/check", external: true }}
-        secondaryAction={{ label: "기관 도입 문의", href: "/contact" }}
+        secondaryAction={{ label: "서비스 문의", href: "/contact" }}
       />
     </>
   );

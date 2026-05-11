@@ -115,7 +115,6 @@ export default function StoryPage() {
         title={<>코그모의 다음 걸음을{" "}<span className="block md:inline">함께하실 분을 찾습니다</span></>}
         description={<>기관 도입, 파트너십, 미디어 문의{" "}<span className="block md:inline">— 무엇이든 편하게 연락주세요.</span></>}
         primaryAction={{ label: "협력 · 도입 문의", href: "/contact" }}
-        secondaryAction={{ label: "미디어 · 보도자료 문의", href: "mailto:official@cogmo.life" }}
       />
     </>
   );

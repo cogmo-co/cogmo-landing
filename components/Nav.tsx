@@ -72,7 +72,7 @@ export default function Nav() {
             href="/contact"
             className="rounded-lg bg-primary px-3 py-2 text-sm font-medium text-white transition hover:bg-primary-dark md:px-5 md:py-2.5"
           >
-            도입문의
+            서비스 문의
           </Link>
           <MobileMenu groups={NAV_GROUPS} />
         </div>

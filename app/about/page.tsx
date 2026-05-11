@@ -242,7 +242,6 @@ export default function AboutPage() {
         title="초고령 시대, 함께 새로운 기준을 만들어갑니다"
         description="기관 도입, 협력 제안, 공공사업 참여 — 어떤 형태든 편하게 문의주세요."
         primaryAction={{ label: "협력 · 도입 문의", href: "/contact" }}
-        secondaryAction={{ label: "이메일로 연락", href: "mailto:official@cogmo.life" }}
       />
     </>
   );
