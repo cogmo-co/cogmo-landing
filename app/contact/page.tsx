@@ -35,6 +35,8 @@ const FAQS = [
   },
 ];
 
+type SubmitStatus = "idle" | "submitting" | "success" | "error";
+
 export default function ContactPage() {
   const [form, setForm] = useState({
     name: "",
@@ -44,20 +46,37 @@ export default function ContactPage() {
     topic: TOPICS[0],
     message: "",
   });
+  const [status, setStatus] = useState<SubmitStatus>("idle");
+  const [errorMsg, setErrorMsg] = useState("");
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const subject = encodeURIComponent(`[상담신청] ${form.topic} - ${form.company}`);
-    const body = encodeURIComponent(
-      `이름: ${form.name}\n소속: ${form.company}\n이메일: ${form.email}\n연락처: ${form.phone}\n문의 유형: ${form.topic}\n\n${form.message}`
-    );
-    window.location.href = `mailto:official@cogmo.life?subject=${subject}&body=${body}`;
+    if (status === "submitting") return;
+    setStatus("submitting");
+    setErrorMsg("");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || "발송에 실패했습니다");
+      }
+      setStatus("success");
+      setForm({ name: "", company: "", email: "", phone: "", topic: TOPICS[0], message: "" });
+    } catch (err) {
+      setStatus("error");
+      setErrorMsg(err instanceof Error ? err.message : "발송에 실패했습니다");
+    }
   };
 
   return (
     <>
       {/* Page header */}
-      <section className="border-b border-hairline bg-white py-5 md:py-7">
+      <section className="border-b border-hairline bg-white py-20 md:py-28">
         <div className="mx-auto max-w-5xl px-6 text-center">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-primary">
             Contact
@@ -154,20 +173,29 @@ export default function ContactPage() {
               <div className="pt-2">
                 <button
                   type="submit"
-                  className="w-full rounded-lg bg-primary px-7 py-3.5 font-medium text-white transition hover:bg-primary-dark md:w-auto"
+                  disabled={status === "submitting"}
+                  className="w-full cursor-pointer rounded-lg bg-primary px-7 py-3.5 font-medium text-white transition hover:bg-primary-dark disabled:cursor-not-allowed disabled:opacity-60 md:w-auto"
                 >
-                  상담 신청하기
+                  {status === "submitting" ? "전송 중..." : "상담 신청하기"}
                 </button>
-                <p className="mt-3 text-xs leading-relaxed text-muted">
-                  제출 시 기본 이메일 클라이언트가 열립니다. 바로{" "}
-                  <a
-                    href="mailto:official@cogmo.life"
-                    className="text-primary underline-offset-2 hover:underline"
-                  >
-                    official@cogmo.life
-                  </a>
-                  {" "}로 직접 메일을 보내셔도 좋습니다.
-                </p>
+
+                {status === "success" && (
+                  <p className="mt-4 rounded-md border border-primary/30 bg-primary/5 px-4 py-3 text-sm text-primary">
+                    상담 신청이 정상적으로 접수되었습니다. 영업일 기준 1~2일 내 회신드리겠습니다.
+                  </p>
+                )}
+                {status === "error" && (
+                  <p className="mt-4 rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600">
+                    {errorMsg} — 잠시 후 다시 시도하시거나{" "}
+                    <a
+                      href="mailto:official@cogmo.life"
+                      className="underline underline-offset-2"
+                    >
+                      official@cogmo.life
+                    </a>
+                    {" "}으로 직접 연락 부탁드립니다.
+                  </p>
+                )}
               </div>
             </form>
           </div>
