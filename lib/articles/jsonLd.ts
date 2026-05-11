@@ -16,10 +16,11 @@ export function buildArticleJsonLd(article: Article) {
     image: article.cover_url ? [article.cover_url] : undefined,
     datePublished: article.published_at ?? undefined,
     dateModified: article.updated_at ?? article.published_at ?? undefined,
-    author: { "@type": "Organization", name: "Cogmo" },
+    author: { "@type": "Organization", name: "Cogmo", url: BASE_URL },
     publisher: {
       "@type": "Organization",
       name: "Cogmo",
+      url: BASE_URL,
       logo: {
         "@type": "ImageObject",
         url: `${BASE_URL}/icon.svg`,
