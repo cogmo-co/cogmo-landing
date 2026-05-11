@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ChevronRight, Home } from "lucide-react";
@@ -5,6 +6,7 @@ import { fetchArticleById } from "../_lib/queries";
 import { CATEGORY_LABEL } from "@/lib/articles/categories";
 import { formatLongDate } from "@/lib/articles/format";
 import ArticleBody from "@/components/articles/ArticleBody";
+import ArticleJsonLd from "@/components/articles/ArticleJsonLd";
 import ViewTracker from "@/components/articles/ViewTracker";
 
 interface PageProps {
@@ -16,7 +18,7 @@ function extractDescription(html: string, maxLength = 160): string {
   return text.length > maxLength ? text.slice(0, maxLength).trim() + "…" : text;
 }
 
-export async function generateMetadata({ params }: PageProps) {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { id } = await params;
   const article = await fetchArticleById(id);
   if (!article) return { title: "아티클 | Cogmo" };
@@ -45,6 +47,7 @@ export default async function ArticleDetailPage({ params }: PageProps) {
 
   return (
     <article className="mx-auto max-w-3xl px-6 py-12 md:py-16">
+      <ArticleJsonLd article={article} />
       <ViewTracker articleId={article.id} />
 
       <header className="mb-10 text-center">
