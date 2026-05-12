@@ -45,6 +45,7 @@ export default function ContactPage() {
     phone: "",
     topic: TOPICS[0],
     message: "",
+    website: "", // honeypot — 봇 차단용. 사람은 안 보이는 필드라 비어있음.
   });
   const [status, setStatus] = useState<SubmitStatus>("idle");
   const [errorMsg, setErrorMsg] = useState("");
@@ -66,7 +67,7 @@ export default function ContactPage() {
         throw new Error(data.error || "발송에 실패했습니다");
       }
       setStatus("success");
-      setForm({ name: "", company: "", email: "", phone: "", topic: TOPICS[0], message: "" });
+      setForm({ name: "", company: "", email: "", phone: "", topic: TOPICS[0], message: "", website: "" });
     } catch (err) {
       setStatus("error");
       setErrorMsg(err instanceof Error ? err.message : "발송에 실패했습니다");
@@ -109,6 +110,24 @@ export default function ContactPage() {
 
           <div className="mt-14 rounded-2xl border border-hairline bg-white p-8 shadow-[0_10px_30px_rgba(0,0,0,0.04)] md:p-12">
             <form onSubmit={handleSubmit} className="space-y-6">
+              {/* Honeypot — 봇 차단용. 사람은 안 보임. */}
+              <input
+                type="text"
+                name="website"
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                value={form.website}
+                onChange={(e) => setForm({ ...form, website: e.target.value })}
+                style={{
+                  position: "absolute",
+                  left: "-9999px",
+                  width: "1px",
+                  height: "1px",
+                  opacity: 0,
+                }}
+              />
+
               <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                 <Field
                   label="이름"

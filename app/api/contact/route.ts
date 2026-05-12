@@ -42,6 +42,13 @@ function validate(input: unknown): { ok: true; data: ContactPayload } | { ok: fa
 export async function POST(req: Request) {
   try {
     const body = await req.json();
+
+    // Honeypot — 봇은 hidden field 도 채움. 사람은 비어있음.
+    if (body && typeof body === "object" && typeof (body as Record<string, unknown>).website === "string" && (body as Record<string, unknown>).website) {
+      // 봇으로 판단. 발송 안 하되 정상 응답 (봇이 재시도 못 하게)
+      return NextResponse.json({ ok: true });
+    }
+
     const result = validate(body);
     if (!result.ok) {
       return NextResponse.json({ error: result.error }, { status: 400 });
