@@ -11,6 +11,11 @@ const CATEGORIES = [
 ];
 
 const HISTORY = [
+  { year: "2026", month: "07", title: "대한방문재활협회 업무협약 체결", desc: "대한방문재활협회와 방문재활 현장 적용, 서비스 제공자 교육 및 데이터 기반 건강관리 모델 확산을 위한 업무협약 체결." },
+  { year: "2026", month: "05", title: "아파트 커뮤니티 서비스 데모 진행", desc: "인천 부평구·계양구 5개 아파트 단지에서 '안녕' 서비스 데모를 진행하고, 운동지도자 대상 기능적 움직임 검사 교육을 통해 커뮤니티 실증 기반 확보." },
+  { year: "2026", month: "05", title: "써니요양원 업무협약 체결", desc: "요양원 입소 어르신을 대상으로 인지기능·근골격계 평가 및 운동처방의 현장 적용성과 사용성을 검증하기 위한 업무협약 체결." },
+  { year: "2026", month: "05", title: "피엔피헬스케어 업무협약 체결", desc: "방문재활·방문운동 현장에서 '안녕'의 평가 및 운동처방 흐름을 검증하기 위한 B2B 실증 채널 확보." },
+  { year: "2026", month: "05", title: "근골격계 평가·운동처방 기능 개발 완료", desc: "FEA 기반 근골격계 평가 알고리즘과 운동처방 로직, 일러스트·애니메이션 콘텐츠를 완성해 인지·신체기능 통합관리 기반 구축." },
   { year: "2026", month: "04", title: "청년창업사관학교 16기 선정", desc: "중소벤처기업진흥공단 청년창업사관학교 16기 입교." },
   { year: "2026", month: "02", title: "3차 PoC 진행", desc: "시니어 인지건강 서비스 현장 검증 3차 실증 사업." },
   { year: "2026", month: "01", title: "App Store 서비스 등록", desc: "인지기능 검사 '안녕' iOS 앱 출시." },
@@ -22,6 +27,29 @@ const HISTORY = [
   { year: "2025", month: "02", title: "2차 PoC 진행", desc: "현장 피드백 기반 서비스 고도화 2차 실증 사업." },
   { year: "2024", month: "10", title: "1차 PoC 진행", desc: "시니어 인지건강 서비스 최초 현장 검증의 시작." },
 ];
+
+// 같은 연·월 항목을 하나의 마커 아래로 묶음 (HISTORY 는 최신순 정렬 전제)
+const HISTORY_GROUPS: { year: string; month: string; items: typeof HISTORY }[] =
+  [];
+for (const h of HISTORY) {
+  const last = HISTORY_GROUPS[HISTORY_GROUPS.length - 1];
+  if (last && last.year === h.year && last.month === h.month) {
+    last.items.push(h);
+  } else {
+    HISTORY_GROUPS.push({ year: h.year, month: h.month, items: [h] });
+  }
+}
+
+// 연도 단위로 다시 묶음 → 연도 칩 헤더 + 월별 타임라인
+const HISTORY_YEARS: { year: string; months: typeof HISTORY_GROUPS }[] = [];
+for (const g of HISTORY_GROUPS) {
+  const last = HISTORY_YEARS[HISTORY_YEARS.length - 1];
+  if (last && last.year === g.year) {
+    last.months.push(g);
+  } else {
+    HISTORY_YEARS.push({ year: g.year, months: [g] });
+  }
+}
 
 export default function StoryPage() {
   return (
@@ -81,30 +109,66 @@ export default function StoryPage() {
               코그모가 걸어온 <span className="text-primary">길</span>
             </h2>
             <p className="mt-4 text-body">
-              PoC 현장에서 시작해 법인 설립, 서비스 출시, 파트너십까지 — 코그모의
-              주요 이정표입니다.
+              작은 현장 검증에서 출발해 오늘에 이르기까지, 코그모가 걸어온
+              순간들입니다.
             </p>
           </div>
-          <ol className="mt-14 space-y-4">
-            {HISTORY.map((h, idx) => (
-              <li
-                key={`${h.year}-${h.month}-${h.title}`}
-                className={`flex gap-6 rounded-2xl border bg-white p-6 ${idx === 0 ? "border-primary/40 shadow-[0_10px_30px_rgba(50,81,49,0.08)]" : "border-hairline"}`}
-              >
-                <div className="flex-none text-center">
-                  <div className="text-xs font-semibold uppercase tracking-wider text-muted">
-                    {h.year}
-                  </div>
-                  <div className="text-2xl font-black text-primary">
-                    {h.month}
-                  </div>
+          <ol className="mt-14">
+            {HISTORY_YEARS.map((y, yIdx) => (
+              <li key={y.year} className={yIdx > 0 ? "mt-10" : ""}>
+                {/* 연도 헤더 */}
+                <div className="mb-5 text-2xl font-black leading-none text-primary tabular-nums sm:text-3xl">
+                  {y.year}
                 </div>
-                <div className="border-l border-hairline pl-6">
-                  <h3 className="text-base font-bold text-ink">{h.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-body">
-                    {h.desc}
-                  </p>
-                </div>
+                {/* 월별 타임라인 — 연도 내 연속 라인 */}
+                <ol>
+                  {y.months.map((g, mIdx) => {
+                    const isLastMonth = mIdx === y.months.length - 1;
+                    const isVeryFirst = yIdx === 0 && mIdx === 0;
+                    return (
+                      <li
+                        key={`${g.year}-${g.month}`}
+                        className="flex gap-3 sm:gap-4"
+                      >
+                        {/* 월 — 고정폭 → 라인·마커 x 일정 */}
+                        <div className="w-7 flex-none text-right text-base font-bold leading-6 text-primary tabular-nums sm:text-lg">
+                          {g.month}
+                        </div>
+                        {/* 세로 라인 + 마커 + 이벤트 */}
+                        <div
+                          className={`relative flex-1 border-l-2 border-hairline pl-6 sm:pl-8 ${
+                            isLastMonth ? "pb-0" : "pb-10"
+                          }`}
+                        >
+                          <span
+                            aria-hidden
+                            className={`absolute -left-2.25 top-1 h-4 w-4 rounded-full border-2 border-primary ${
+                              isVeryFirst ? "bg-primary" : "bg-white"
+                            }`}
+                          />
+                          <div className="space-y-5">
+                            {g.items.map((it) => (
+                              <div key={it.title}>
+                                <div className="flex items-start gap-2.5">
+                                  <span
+                                    aria-hidden
+                                    className="mt-2.25 h-1.5 w-1.5 flex-none rounded-full bg-primary"
+                                  />
+                                  <h3 className="text-[1.1rem] font-bold leading-6 text-ink">
+                                    {it.title}
+                                  </h3>
+                                </div>
+                                <p className="mt-1.5 pl-4.5 text-[0.9rem] leading-relaxed text-muted">
+                                  {it.desc}
+                                </p>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </li>
+                    );
+                  })}
+                </ol>
               </li>
             ))}
           </ol>

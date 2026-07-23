@@ -31,22 +31,21 @@ export default function Home() {
               초기 신호를 감지하여 선제적 대응을 돕습니다.
             </p>
             <div className="mt-10 flex flex-wrap justify-center gap-3">
-              <a
-                href="/check"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="rounded-lg bg-primary px-7 py-3.5 font-medium text-white transition hover:bg-primary-dark"
+              <button
+                type="button"
+                disabled
+                aria-disabled="true"
+                title="준비중"
+                className="cursor-not-allowed rounded-lg bg-primary/40 px-7 py-3.5 font-medium text-white/70"
               >
-                무료 검사 시작
-              </a>
-              <a
-                href="https://www.cogmo.life/contact.html"
-                target="_blank"
-                rel="noopener noreferrer"
+                준비중
+              </button>
+              <Link
+                href="/contact"
                 className="rounded-lg border border-primary/30 bg-white px-7 py-3.5 font-medium text-primary transition hover:border-primary hover:bg-primary/5"
               >
                 기관 도입 문의
-              </a>
+              </Link>
             </div>
 
             {/* Phone mockup — fade-up 진입 후 종합점수에 슬롯머신 카운터 발동 */}
@@ -351,7 +350,7 @@ export default function Home() {
         <CTASection
           title="지금 바로 시작해보세요"
           description="기관 담당자는 도입 상담을, 가족은 무료 검사부터 경험해보세요."
-          primaryAction={{ label: "무료 검사 시작", href: "/check", external: true }}
+          primaryAction={{ label: "준비중", href: "/check", disabled: true }}
           secondaryAction={{ label: "기관 도입 문의", href: "/contact" }}
         />
     </>

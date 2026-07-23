@@ -1,12 +1,14 @@
+import Link from "next/link";
+
 export const metadata = {
   title: "다운로드 | Cogmo",
-  description: "Cogmo 앱 다운로드 — 곧 출시 예정",
+  description: "안녕 앱 베타테스트 진행중 — 9월 출시 예정",
 };
 
 export default function DownloadPage() {
   return (
     <>
-      {/* 헤더 — 다른 페이지와 동일 패턴 */}
+      {/* 헤더 — 사이트 표준 패턴 (eyebrow + h1 + subtitle) */}
       <section className="border-b border-hairline bg-white py-20 md:py-28">
         <div className="mx-auto max-w-5xl px-6 text-center">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-primary">
@@ -16,27 +18,48 @@ export default function DownloadPage() {
             다운로드
           </h1>
           <p className="mt-5 text-base leading-relaxed text-body md:text-lg">
-            안녕 앱을 다운로드하세요.
+            인지건강 모니터링 &apos;안녕&apos; 앱을 가장 먼저 만나보세요.
           </p>
         </div>
       </section>
 
-      {/* 본문 — Nav/Footer 사이 빈 공간 가운데 정렬 */}
-      <div className="flex flex-1 items-center justify-center px-6 py-20 md:py-28">
-        <div className="max-w-3xl text-center">
-          <h2 className="text-2xl font-bold text-ink md:text-3xl">
-            재정비 중입니다.
+      {/* 본문 — 베타 안내 + 신청 CTA */}
+      <section className="bg-white py-24 md:py-32">
+        <div className="mx-auto max-w-3xl px-6 text-center">
+          <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-semibold text-primary">
+            <span className="inline-block h-2 w-2 rounded-full bg-primary" />
+            베타테스트 진행중
+          </span>
+          <h2 className="mt-6 text-2xl font-bold text-ink md:text-3xl">
+            먼저 경험하고, 함께 완성해 주세요
           </h2>
-          <p className="mt-4 text-base text-muted md:text-lg">
-            더 나은 모습으로 곧 돌아오겠습니다.
+          <p className="mt-4 text-base leading-relaxed text-muted md:text-lg">
+            &apos;안녕&apos;을 이용해 보시고, 여러분의 의견을 들려주세요.
+            <br />
+            정식 출시는 <strong className="text-body">9월 예정</strong>입니다.
           </p>
 
-          <div className="mt-12 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <StoreButton store="apple" />
-            <StoreButton store="google" />
+          <div className="mt-10 flex justify-center">
+            <Link
+              href="/contact"
+              className="rounded-xl bg-primary px-8 py-3.5 font-medium text-white transition hover:bg-primary-dark"
+            >
+              베타테스트 신청
+            </Link>
+          </div>
+
+          {/* 정식 출시 후 활성화될 스토어 링크 (현재 비활성) */}
+          <div className="mt-16">
+            <p className="text-sm text-muted">
+              정식 출시와 함께 스토어에서 만나보실 수 있습니다.
+            </p>
+            <div className="mt-4 flex flex-col items-center justify-center gap-3 sm:flex-row">
+              <StoreButton store="apple" />
+              <StoreButton store="google" />
+            </div>
           </div>
         </div>
-      </div>
+      </section>
     </>
   );
 }

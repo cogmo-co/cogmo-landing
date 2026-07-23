@@ -4,8 +4,8 @@
 
 /* Tailwind v4 @theme — utilities: bg-primary, text-primary, bg-surface, ... */
 @theme {
-  --color-primary: #325131;
-  --color-primary-dark: #243b24;
+  --color-primary: #00874D;
+  --color-primary-dark: #005530;
   --color-ink: #111827;
   --color-body: #374151;
   --color-muted: #6b7280;
