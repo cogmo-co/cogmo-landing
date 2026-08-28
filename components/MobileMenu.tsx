@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ChevronDown, Menu, X } from "lucide-react";
 
 export interface NavGroup {
@@ -18,6 +19,13 @@ export default function MobileMenu({ groups }: MobileMenuProps) {
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [expanded, setExpanded] = useState<string | null>(null);
+  const pathname = usePathname();
+
+  // 경로가 바뀌면 닫기 — 패널 밖(Nav 의 다운로드·서비스 문의 버튼, 로고)이나
+  // 브라우저 뒤로가기로 이동한 경우까지 포함해서 열린 채로 남지 않도록 함
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
 
   // Portal: SSR에서 document 없으므로 mount 후에만 렌더 (cascading render 회피 위해 microtask로)
   useEffect(() => {

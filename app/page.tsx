@@ -31,15 +31,12 @@ export default function Home() {
               초기 신호를 감지하여 선제적 대응을 돕습니다.
             </p>
             <div className="mt-10 flex flex-wrap justify-center gap-3">
-              <button
-                type="button"
-                disabled
-                aria-disabled="true"
-                title="준비중"
-                className="cursor-not-allowed rounded-lg bg-primary/40 px-7 py-3.5 font-medium text-white/70"
+              <Link
+                href="/download"
+                className="rounded-lg bg-primary px-7 py-3.5 font-medium text-white transition hover:bg-primary-dark"
               >
-                준비중
-              </button>
+                앱 다운로드
+              </Link>
               <Link
                 href="/contact"
                 className="rounded-lg border border-primary/30 bg-white px-7 py-3.5 font-medium text-primary transition hover:border-primary hover:bg-primary/5"

@@ -1,11 +1,12 @@
 /**
- * 상담신청 페이지
+ * 서비스 문의 페이지
  * 원본: https://www.cogmo.life/contact.html
  * 톤: 화이트 + #325131 primary, about/page.tsx와 동일한 헤더 패턴
  */
 "use client";
 
 import { useState } from "react";
+import { formatPhone } from "@/lib/phone";
 
 const TOPICS = [
   "서비스 도입 문의",
@@ -83,7 +84,7 @@ export default function ContactPage() {
             Contact
           </p>
           <h1 className="mt-6 text-4xl font-black leading-[1.15] tracking-tight text-ink md:text-5xl">
-            상담신청
+            서비스 문의
           </h1>
           <p className="mt-5 text-base leading-relaxed text-body md:text-lg">
             기관 도입, 파트너십, 프로그램 신청 등 편하게 문의주세요.
@@ -156,11 +157,12 @@ export default function ContactPage() {
                   type="tel"
                   placeholder="010-0000-0000"
                   value={form.phone}
-                  onChange={(v) => setForm({ ...form, phone: v })}
+                  onChange={(v) => setForm({ ...form, phone: formatPhone(v) })}
                 />
               </div>
 
-              <div>
+              {/* 위 2열 그리드의 한 칸과 같은 폭 — gap-6(1.5rem)의 절반을 뺀다 */}
+              <div className="md:w-[calc(50%-0.75rem)]">
                 <label className="block text-sm font-semibold text-ink">
                   문의 유형
                 </label>
@@ -200,7 +202,7 @@ export default function ContactPage() {
 
                 {status === "success" && (
                   <p className="mt-4 rounded-md border border-primary/30 bg-primary/5 px-4 py-3 text-sm text-primary">
-                    상담 신청이 정상적으로 접수되었습니다. 영업일 기준 1~2일 내 회신드리겠습니다.
+                    문의가 정상적으로 접수되었습니다. 영업일 기준 1~2일 내 회신드리겠습니다.
                   </p>
                 )}
                 {status === "error" && (

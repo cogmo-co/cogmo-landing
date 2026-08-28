@@ -19,6 +19,12 @@
   --animate-fade-in-zoom: fade-in-zoom 1400ms cubic-bezier(0.22, 1, 0.36, 1) 200ms both;
   --animate-fea-slide: fea-slide 16s ease-in-out infinite;
   --animate-program-slide: program-slide 20s ease-in-out infinite;
+
+  /* 다운로드 페이지 — 행 단위 순차 등장. blur 는 초점이 맞아 들어오는 인상이라
+     이동거리 20px 만으로도 '도착'으로 읽힘 (silviahealth 실측값 계열).
+     fill-mode 는 both 가 아니라 backwards — both 는 종료 후 blur(0) 을 영구
+     잔류시켜 불필요한 스태킹 컨텍스트를 남김. */
+  --animate-reveal: reveal 700ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
 }
 
 @keyframes fade-up {
@@ -102,4 +108,155 @@ body {
 .ProseMirror h3,
 .ProseMirror h4 {
   line-height: 1.3;
+}
+
+/* 다운로드 페이지 밴드 — 앱 홈 화면 배경 그라디언트의 기하를 그대로 이식.
+   출처: annyeong-front home_screen.dart _BackgroundLayer (Figma 스펙 주석)
+   radial-gradient(121.46% 197.43% at 82.46% -11.99%), stops 13.37/50.21/66.82/83.25/100%
+   기하·색상은 100% 보존하고 알파만 눌러 지면 위에서 은은하게 앉힘.
+   저알파 그라디언트는 넓은 면에서 밴딩이 보이므로 feTurbulence 노이즈를 겹쳐 디더 역할. */
+.surface-annyeong {
+  position: relative;
+  isolation: isolate;
+  /* ::before 하이라이트가 inset 음수로 밴드 밖까지 뻗으므로 반드시 잘라낸다.
+     없으면 가로 오버플로가 생겨 Nav 레이아웃이 밀린다. */
+  overflow: hidden;
+  background-image: radial-gradient(
+    121.46% 197.43% at 82.46% -11.99%,
+    rgba(223, 242, 225, 0.62) 13.37%,
+    rgba(230, 243, 216, 0.58) 50.21%,
+    rgba(203, 227, 197, 0.68) 66.82%,
+    rgba(190, 219, 188, 0.76) 83.25%,
+    rgba(138, 191, 165, 0.86) 100%
+  );
+}
+
+/* 광택 — 하이라이트가 아주 느린 주기로 떠다니며 지면이 은은하게 숨쉰다.
+   26s 는 '움직인다'고 인지되지 않고 시선을 뺏지 않는 대역. */
+.surface-annyeong::before {
+  content: "";
+  position: absolute;
+  inset: -25%;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    closest-side,
+    rgba(255, 255, 255, 0.6),
+    rgba(255, 255, 255, 0) 72%
+  );
+  animation: sheen 26s ease-in-out infinite;
+}
+
+/* grain — 밴딩 디더 + 촉감. 노이즈 사각형이 검정이라 진하면 채도를 죽인다. */
+.surface-annyeong::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.09;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@keyframes sheen {
+  0%,
+  100% {
+    transform: translate3d(-9%, -5%, 0) scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translate3d(9%, 5%, 0) scale(1.18);
+    opacity: 0.9;
+  }
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    filter: blur(8px);
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+/* stagger — 이 규칙은 레이어 없는 최상위에 두어야 한다.
+   animation 단축 속성이 animation-delay 를 0 으로 리셋하므로
+   "레이어 없는 규칙이 레이어된 규칙을 이긴다"는 캐스케이드에 의존한다.
+   @layer utilities 안으로 옮기면 delay 가 전부 0 이 되어 동시 등장으로 붕괴한다. */
+.seq-item {
+  animation-delay: calc(var(--seq-base, 0ms) + var(--i, 0) * var(--seq-step, 70ms));
+}
+.seq {
+  --seq-step: 110ms;
+}
+@media (max-width: 767px) {
+  .seq {
+    --seq-step: 95ms;
+  }
+}
+
+/* 서명 — 깃펜이 왼쪽에서 오른쪽으로 지나가며 밑줄을 긋는다.
+   rule 의 scaleX 와 feather 의 translateX 가 같은 duration·easing·delay 를 써서
+   깃펜 촉(SVG 좌하단)이 그어지는 선의 끝에 항상 붙어 있게 된다. */
+.signature {
+  /* 화면 폭의 절반. 큰 화면에서 과하게 길어지지 않도록 상한을 둔다. */
+  --sig-len: min(50vw, 300px);
+  --feather: 56px;
+  position: relative;
+  width: var(--sig-len);
+  height: 3px;
+}
+@media (min-width: 768px) {
+  .signature {
+    --feather: 68px;
+  }
+}
+.signature-rule {
+  display: block;
+  height: 100%;
+  width: 100%;
+  border-radius: 2px;
+  background: var(--color-primary);
+  transform: scaleX(0);
+  transform-origin: left center;
+  animation: sig-draw 1700ms cubic-bezier(0.4, 0.85, 0.35, 1) forwards;
+}
+.signature-feather {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: var(--feather);
+  height: var(--feather);
+  color: var(--color-primary);
+  transform: translateX(0);
+  animation: sig-glide 1700ms cubic-bezier(0.4, 0.85, 0.35, 1) forwards;
+}
+@keyframes sig-draw {
+  to {
+    transform: scaleX(1);
+  }
+}
+@keyframes sig-glide {
+  to {
+    transform: translateX(var(--sig-len));
+  }
+}
+/* 모션 억제 시 — 애니메이션 없이 완성된 서명 상태로 렌더 */
+@media (prefers-reduced-motion: reduce) {
+  .signature-rule {
+    animation: none;
+    transform: scaleX(1);
+  }
+  .signature-feather {
+    animation: none;
+    transform: translateX(var(--sig-len));
+  }
+  .surface-annyeong::before {
+    animation: none;
+    opacity: 0.55;
+  }
 }
