@@ -16,12 +16,6 @@ const OVERALL_TESTS = [
   { num: "08", title: "Bird-Dog", desc: "코어 안정성과 밀기 패턴을 평가합니다. 푸시업, 백 아치 홀드 등으로 체간 안정화 능력을 확인합니다." },
 ];
 
-const SCORING = [
-  { tag: "O", title: "정상 수행", desc: "Overall Test를 정상적으로 수행하면\nO 판정. 해당 항목의 Detail Test는 생략하고 만점을 부여합니다." },
-  { tag: "X", title: "수행 불가", desc: "Overall Test를 수행하지 못하면 X 판정. Detail Test를 진행하여 제한의 원인을 세부적으로 분석합니다." },
-  { tag: "⚠", title: "Alarm", desc: "통증이 발생하면 Alarm 판정.\n해당 영역의 점수는 0점 처리되며, 전문가 상담을 우선 권고합니다." },
-];
-
 const FOUNDATIONS = [
   { tag: "POSITIVE HEALTH", title: "건강 자산 관점", desc: "질병 유무가 아닌 개인이 보유한 건강 자산(Health Assets)에 집중합니다. 건강 증진(Health Promotion)을 통해 자산을 키우고 유지하는 것이 핵심입니다." },
   { tag: "FLIGHT ENVELOPE", title: "안전 움직임 영역", desc: "Flight Envelope Theory를 인체에 적용하여, 안전하게 움직일 수 있는 영역과 위험 영역의 경계를 파악하고 움직임 역량을 확장합니다." },
@@ -83,21 +77,29 @@ export default function ServiceFeaPage() {
             </p>
           </div>
           {/* 폰 목업 + 4장 자동 슬라이드 (4s 구간 × 4장 = 16s 주기) */}
-          <div className="relative mx-auto aspect-[9/19] w-full max-w-[260px] animate-fade-in-zoom rounded-[2rem] bg-ink p-1 shadow-[0_20px_50px_rgba(0,0,0,0.22)]">
-            <div className="absolute left-1/2 top-2 z-10 h-4 w-16 -translate-x-1/2 rounded-full bg-ink" />
-            <div className="relative h-full overflow-hidden rounded-[1.75rem] bg-white">
-              {[1, 2, 3, 4].map((n, idx) => (
-                <Image
-                  key={n}
-                  src={`/images/service/FEA/main${n}.jpg`}
-                  alt={`FEA 앱 화면 ${n}`}
-                  fill
-                  sizes="260px"
-                  priority={idx === 0}
-                  className="animate-fea-slide object-cover object-top opacity-0"
-                  style={{ animationDelay: `${idx * 4}s` }}
-                />
-              ))}
+          {/* 폰 프레임 — 화면 맨 위에 흰 상태바 띠를 두고 그 위에 아일랜드를 얹는다.
+              넣는 스크린샷이 iOS 상태바 없이 앱 화면부터 시작하는 캡처라, 아일랜드를 스크린샷 위에
+              바로 겹치면 앱 상단바(뒤로가기·종료)를 가린다. 띠를 따로 두면 안 가리면서 아일랜드도 보인다.
+              비율은 프레임이 아니라 스크린샷 쪽에 둔다 — 프레임에 두면 베젤·띠만큼 어긋나 좌우가 잘린다. */}
+          <div className="relative mx-auto w-full max-w-[260px] animate-fade-in-zoom rounded-[2rem] bg-ink p-1.5 shadow-[0_20px_50px_rgba(0,0,0,0.22)]">
+            <div className="overflow-hidden rounded-[1.6rem] bg-white">
+              <div className="flex h-6 items-center justify-center">
+                <div className="h-2.5 w-10 rounded-full bg-ink" />
+              </div>
+              <div className="relative aspect-[135/256] w-full">
+                {[1, 2, 3, 4].map((n, idx) => (
+                  <Image
+                    key={n}
+                    src={`/images/service/FEA/main${n}.jpg`}
+                    alt={`FEA 앱 화면 ${n}`}
+                    fill
+                    sizes="260px"
+                    priority={idx === 0}
+                    className="animate-fea-slide object-cover object-top opacity-0"
+                    style={{ animationDelay: `${idx * 4}s` }}
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -130,47 +132,8 @@ export default function ServiceFeaPage() {
         </div>
       </section>
 
-      {/* Scoring System */}
-      <section className="border-b border-hairline bg-white py-24">
-        <div className="mx-auto max-w-5xl px-6">
-          <div className="text-center">
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-primary">
-              Scoring System
-            </p>
-            <h2 className="mt-4 text-3xl font-bold leading-tight text-ink md:text-4xl">
-              100점 만점{" "}
-              <span className="block text-primary md:inline">O / X / Alarm</span>{" "}
-              <span className="block md:inline">평가 체계</span>
-            </h2>
-          </div>
-          <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-3">
-            {SCORING.map((s) => (
-              <div key={s.tag} className="rounded-2xl border border-hairline bg-white p-8 text-center">
-                <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-xl font-black text-primary">
-                  {s.tag}
-                </span>
-                <h3 className="mt-5 text-lg font-bold text-ink">{s.title}</h3>
-                <p className="mt-3 whitespace-pre-line leading-relaxed text-body">{s.desc}</p>
-              </div>
-            ))}
-          </div>
-          <div className="mt-6 rounded-2xl border border-hairline bg-surface p-8 text-center">
-            <h3 className="text-lg font-bold text-ink">5개 신체 영역별 점수</h3>
-            <p className="mt-3 leading-relaxed text-body">
-              총 100점은{" "}
-              <strong className="text-ink">
-                Core &amp; Balance · Vertebral Column · Hip · Shoulder · Lower Limb
-              </strong>{" "}
-              5개 영역으로 나뉘어 감산 방식으로 산출됩니다.
-              <br />
-              영역별 점수를 통해 개선이 필요한 부위를 명확히 파악할 수 있습니다.
-            </p>
-          </div>
-        </div>
-      </section>
-
       {/* Foundation */}
-      <section className="border-b border-hairline bg-surface py-24">
+      <section className="border-b border-hairline bg-white py-24">
         <div className="mx-auto max-w-6xl px-6">
           <div className="text-center">
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-primary">

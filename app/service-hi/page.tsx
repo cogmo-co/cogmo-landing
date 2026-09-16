@@ -94,16 +94,24 @@ export default function ServiceHiPage() {
               style={{ boxShadow: "0 20px 40px rgba(50, 81, 49, 0.08)" }}
             />
             <div className="absolute right-0 top-1/2 w-[35%] -translate-y-1/2">
-              <div className="relative aspect-[9/19] w-full animate-fade-in-zoom rounded-[2rem] bg-ink p-1 shadow-[0_20px_50px_rgba(0,0,0,0.22)]">
-                <div className="absolute left-1/2 top-2 z-10 h-4 w-16 -translate-x-1/2 rounded-full bg-ink" />
-                <div className="relative h-full overflow-hidden rounded-[1.75rem] bg-white">
-                  <Image
-                    src="/images/service/annyeong/annyeong_main-2.jpg"
-                    alt="안녕 모바일 앱 화면"
-                    fill
-                    sizes="(max-width: 1024px) 28vw, 280px"
-                    className="object-cover object-top"
-                  />
+              {/* 폰 프레임 — 화면 맨 위에 흰 상태바 띠를 두고 그 위에 아일랜드를 얹는다.
+                  넣는 스크린샷이 iOS 상태바 없이 앱 화면부터 시작하는 캡처라, 아일랜드를 스크린샷 위에
+                  바로 겹치면 앱 상단바(뒤로가기·종료)를 가린다. 띠를 따로 두면 안 가리면서 아일랜드도 보인다.
+                  비율은 프레임이 아니라 스크린샷 쪽에 둔다 — 프레임에 두면 베젤·띠만큼 어긋나 좌우가 잘린다. */}
+              <div className="relative w-full animate-fade-in-zoom rounded-[2rem] bg-ink p-1.5 shadow-[0_20px_50px_rgba(0,0,0,0.22)]">
+                <div className="overflow-hidden rounded-[1.6rem] bg-white">
+                  <div className="flex h-6 items-center justify-center">
+                    <div className="h-2.5 w-10 rounded-full bg-ink" />
+                  </div>
+                  <div className="relative aspect-[135/256] w-full">
+                    <Image
+                      src="/images/service/annyeong/annyeong_main-2.jpg"
+                      alt="안녕 모바일 앱 화면"
+                      fill
+                      sizes="(max-width: 1024px) 28vw, 280px"
+                      className="object-cover object-top"
+                    />
+                  </div>
                 </div>
               </div>
             </div>

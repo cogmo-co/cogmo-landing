@@ -12,6 +12,10 @@ interface CTASectionProps {
   description: React.ReactNode;
   primaryAction: CTAButton;
   secondaryAction?: CTAButton;
+  /** 버튼 아래 보조 문구(요금 요약 등). 없으면 렌더하지 않는다 */
+  footnote?: React.ReactNode;
+  /** 앵커 대상으로 쓸 때만 지정. sticky 헤더에 가리지 않도록 scroll-mt 가 같이 붙는다 */
+  id?: string;
 }
 
 export default function CTASection({
@@ -19,9 +23,14 @@ export default function CTASection({
   description,
   primaryAction,
   secondaryAction,
+  footnote,
+  id,
 }: CTASectionProps) {
   return (
-    <section className="bg-primary py-40 text-white">
+    <section
+      id={id}
+      className={`bg-primary py-40 text-white ${id ? "scroll-mt-16" : ""}`}
+    >
       <div className="mx-auto max-w-3xl px-6 text-center">
         <h2 className="text-3xl font-bold leading-tight md:text-4xl">{title}</h2>
         <p className="mt-5 text-lg text-white/80">{description}</p>
@@ -35,6 +44,7 @@ export default function CTASection({
             <CTAButtonView button={secondaryAction} variant="secondary" />
           )}
         </div>
+        {footnote && <p className="mt-8 text-sm text-white/70">{footnote}</p>}
       </div>
     </section>
   );

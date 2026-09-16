@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { COMPANY } from "@/lib/company";
 
 export default function Footer() {
   return (
@@ -24,7 +25,8 @@ export default function Footer() {
             </h6>
             <ul className="space-y-2">
               <li><Link href="/about" className="text-sm transition hover:text-white">브랜드 소개</Link></li>
-              <li><Link href="/story" className="text-sm transition hover:text-white">코그모스토리</Link></li>
+              <li><Link href="/story" className="text-sm transition hover:text-white">코그모 스토리</Link></li>
+              <li><Link href="/articles" className="text-sm transition hover:text-white">아티클</Link></li>
               <li><Link href="/contact" className="text-sm transition hover:text-white">상담신청</Link></li>
             </ul>
           </div>
@@ -42,21 +44,43 @@ export default function Footer() {
               Contact
             </h6>
             <address className="text-sm not-italic leading-relaxed">
-              코그모 주식회사
+              {COMPANY.nameKo}
+              {COMPANY.addressLines.map((line) => (
+                <span key={line}>
+                  <br />
+                  {line}
+                </span>
+              ))}
               <br />
-              인천 미추홀구 인하로 100
-              <br />
-              인하대학교 인하드림센터 204A
-              <br />
-              <a href="mailto:official@cogmo.life" className="transition hover:text-white">
-                official@cogmo.life
+              <a
+                href={`mailto:${COMPANY.email}`}
+                className="transition hover:text-white"
+              >
+                {COMPANY.email}
               </a>
             </address>
           </div>
         </div>
-        <div className="mt-12 flex flex-wrap justify-between gap-3 border-t border-white/10 pt-6 text-xs text-white/50">
-          <span>© 2025 Cogmo Co., Ltd. All rights reserved.</span>
-          <span>사업자등록번호 702-87-03690 · 대표이사 한석규</span>
+        <div className="mt-12 border-t border-white/10 pt-6 text-xs text-white/50">
+          <div className="flex flex-wrap justify-between gap-3">
+            <span>© 2025 {COMPANY.nameEn} All rights reserved.</span>
+            <span>
+              사업자등록번호 {COMPANY.registrationNumber} · 대표이사 {COMPANY.ceo}
+            </span>
+          </div>
+          {/* Flaticon 무료 라이선스는 출처 표기가 조건이다. 언어 스위처의 국기 아이콘
+              (public/brand/flags/*.png)이 여기서 왔으므로 지우지 말 것. */}
+          <p className="mt-3 text-white/40">
+            국기 아이콘 제작자:{" "}
+            <a
+              href="https://www.flaticon.com/kr/free-icons/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline underline-offset-2 transition hover:text-white/70"
+            >
+              iconset.co – Flaticon
+            </a>
+          </p>
         </div>
       </div>
     </footer>
