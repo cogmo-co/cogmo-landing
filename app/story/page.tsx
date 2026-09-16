@@ -1,5 +1,5 @@
 /**
- * 코그모스토리 페이지
+ * 코그모 스토리 페이지
  * 원본: https://www.cogmo.life/story.html
  */
 import CTASection from "@/components/CTASection";
@@ -60,7 +60,7 @@ export default function StoryPage() {
             Cogmo Story
           </p>
           <h1 className="mt-6 text-4xl font-black leading-[1.15] tracking-tight text-ink md:text-5xl">
-            코그모스토리
+            코그모 스토리
           </h1>
           <p className="mt-5 text-base leading-relaxed text-body md:text-lg">
             현장 이야기, 보도자료, 파트너십 소식을{" "}

@@ -56,13 +56,16 @@ export default function HealthcareSeniorPage() {
       <section className="border-b border-hairline bg-white py-24">
         <div className="mx-auto max-w-6xl px-6">
           {/* 이미지 슬라이드 캐러셀 (좌우 화살표 + 하단 콩단추)
-              aspect-[7/4] + object-top으로 하단 ~14% 자동 크롭 → 워터마크 제거 */}
+              aspect-[7/4] + object-top 으로 하단 ~14% 자동 크롭 → 워터마크 제거.
+              넓은 화면에서 이미지 한 장이 첫 화면을 다 먹지 않도록 본문(max-w-6xl)보다 좁은
+              max-w-4xl 로 폭을 제한한다(1152×658 → 896×512). 비율을 납작하게 눌러 높이를 줄이면
+              크롭이 그만큼 세져 인물 하반신이 잘리므로, 비율은 두고 폭만 줄이는 쪽을 택했다. */}
           <ImageCarousel
             images={[
               { src: "/images/program/senior_health/main1.jpg", alt: "시니어 그룹 건강관리 현장 1" },
               { src: "/images/program/senior_health/main2.jpg", alt: "시니어 그룹 건강관리 현장 2" },
             ]}
-            className="aspect-[7/4] w-full animate-fade-in-zoom rounded-2xl border border-hairline bg-surface"
+            className="mx-auto aspect-[7/4] w-full max-w-4xl animate-fade-in-zoom rounded-2xl border border-hairline bg-surface"
           />
 
           {/* 하단 텍스트 블록 */}

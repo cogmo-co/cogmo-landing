@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import SiteChrome from "@/components/SiteChrome";
+import { LanguageProvider } from "@/lib/i18n/LanguageContext";
 import "./globals.css";
 
 const SITE_TITLE = "진단 이전에 시작하는 인지건강 모니터링 | Cogmo";
@@ -52,8 +53,13 @@ export default function RootLayout({
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
         })(window,document,"clarity","script","wn5stpiy92");`}
       </Script>
+      {/* LanguageProvider 가 최상단에 있는 건 헤더 때문이다 — 헤더는 전 페이지 공통이라
+          layout 에서 렌더되는데, 홈에서는 선택한 언어로 그려져야 한다. 홈이 아닌 페이지는
+          헤더 스스로 한국어로 고정한다(components/Nav.tsx 참고). */}
       <body suppressHydrationWarning>
-        <SiteChrome>{children}</SiteChrome>
+        <LanguageProvider>
+          <SiteChrome>{children}</SiteChrome>
+        </LanguageProvider>
       </body>
     </html>
   );

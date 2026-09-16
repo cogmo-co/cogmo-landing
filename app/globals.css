@@ -2,6 +2,18 @@
 @import "tailwindcss";
 @plugin "../node_modules/@tailwindcss/typography";
 
+/* Tailwind v4는 Preflight에서 button의 cursor:pointer를 뺐다(v3엔 있었음).
+   클릭 가능한 기본 요소를 손가락 커서로 되돌린다 → 요소마다 cursor-pointer 불필요.
+   :not(:disabled) 라 준비중 버튼 등에 붙은 cursor-not-allowed 는 그대로 이긴다.
+   <div> 등에 onClick만 단 클릭영역은 button이 아니라 개별 지정이 필요하다.
+   (annyeong-web/app/globals.css 와 같은 처리 — 두 저장소가 같은 규칙을 쓰게 맞춘 것) */
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
 /* Tailwind v4 @theme — utilities: bg-primary, text-primary, bg-surface, ... */
 @theme {
   --color-primary: #00874D;
@@ -15,27 +27,22 @@
   --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont,
     system-ui, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
 
-  --animate-fade-up: fade-up 2800ms cubic-bezier(0.33, 1, 0.68, 1) 200ms both;
+  /* 세리프 — 지금은 웹폰트를 따로 받지 않고 OS 에 있는 한글 명조로 떨어뜨린다(Windows 바탕,
+     macOS AppleMyungjo). 나중에 KoPub World 바탕을 정식 도입하면 맨 앞이 잡히도록 이름만
+     미리 적어둔다. 문서·메모처럼 "적어둔 것"으로 읽혀야 하는 좁은 자리에만 쓸 것. */
+  --font-serif: "KoPub World Batang", "Nanum Myeongjo", AppleMyungjo, Batang, ui-serif,
+    Georgia, serif;
+
   --animate-fade-in-zoom: fade-in-zoom 1400ms cubic-bezier(0.22, 1, 0.36, 1) 200ms both;
   --animate-fea-slide: fea-slide 16s ease-in-out infinite;
   --animate-program-slide: program-slide 20s ease-in-out infinite;
+  --animate-duo-slide: duo-slide 10s ease-in-out infinite;
 
   /* 다운로드 페이지 — 행 단위 순차 등장. blur 는 초점이 맞아 들어오는 인상이라
      이동거리 20px 만으로도 '도착'으로 읽힘 (silviahealth 실측값 계열).
      fill-mode 는 both 가 아니라 backwards — both 는 종료 후 blur(0) 을 영구
      잔류시켜 불필요한 스태킹 컨텍스트를 남김. */
   --animate-reveal: reveal 700ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
-}
-
-@keyframes fade-up {
-  from {
-    opacity: 0;
-    transform: translateY(200px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 @keyframes fade-in-zoom {
@@ -62,6 +69,27 @@
     opacity: 1;
   }
   31.25% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* 2장 크로스페이드(디졸브) — 10s 주기, 각 이미지 5s 구간.
+   지연 0s / 5s 로 두면 한 장의 fade-out(50~60%)과 다음 장의 fade-in 이 1s 겹쳐
+   공백 없이 넘어간다. */
+@keyframes duo-slide {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  60% {
     opacity: 0;
   }
   100% {
@@ -147,15 +175,25 @@ body {
   animation: sheen 26s ease-in-out infinite;
 }
 
-/* grain — 밴딩 디더 + 촉감. 노이즈 사각형이 검정이라 진하면 채도를 죽인다. */
+/* grain — 밴딩 디더 + 촉감.
+   예전에는 검은 노이즈 사각형을 그냥 얹었다. 그러면 지면이 그을린 것처럼 채도가 죽고,
+   깊이 없는 먼지로 보인다(그래서 opacity 를 0.09 까지 눌러야 했다).
+   지금은 feDiffuseLighting 으로 노이즈에 빛을 쏜다 — 결과가 검정이 아니라 중간 회색을
+   중심으로 한 밝은 면/어두운 면이 되어 요철로 읽힌다. diffuseConstant 0.6 은 평평한
+   부분이 대략 중간 회색에 앉도록 맞춘 값 — 1.0 이면 전체가 밝아져 밴드가 바래 보인다.
+   mix-blend-mode: overlay 는 중간 회색을 무효로 만들기 때문에 요철의 '차이'만 지면을
+   밝히거나 어둡게 한다. 색을 덮지 않아 그린 그라디언트가 그대로 살고, 같은 세기라도
+   검은 노이즈보다 훨씬 옅게 느껴진다.
+   .surface-annyeong 에 isolation:isolate 가 걸려 있어 블렌딩은 이 밴드 안에서만 일어난다. */
 .surface-annyeong::after {
   content: "";
   position: absolute;
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  opacity: 0.09;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.3;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch' result='t'/%3E%3CfeDiffuseLighting in='t' lighting-color='white' surfaceScale='2' diffuseConstant='0.6'%3E%3CfeDistantLight azimuth='45' elevation='62'/%3E%3C/feDiffuseLighting%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 @keyframes sheen {
@@ -258,5 +296,81 @@ body {
   .surface-annyeong::before {
     animation: none;
     opacity: 0.55;
+  }
+}
+
+/* CoreValue 사각 순환도 — 빛 한 점이 고리를 시계방향으로 돈다.
+   진입선 ①→② 를 포함해 다섯 구간을 1s 씩 릴레이(지연 0/1/2/3/4s, 주기 5s)해서
+   '한 바퀴'가 ① 에서 시작하게 한다.
+   고리 크기가 다국어 문장 길이에 따라 변하므로 px 가 아니라 left/top 백분율로 움직인다.
+
+   fill-mode 는 기본값 none 이어야 한다 — backwards/both 로 두면 지연 중에도 키프레임
+   0% (opacity:1) 가 적용돼 네 점이 첫 1초 동안 동시에 서 있는 게 보인다.
+   지연 구간에는 아래 base 의 opacity:0 이 그대로 적용돼야 한다. */
+.cv-dot {
+  position: absolute;
+  z-index: 5;
+  height: 10px;
+  width: 10px;
+  border-radius: 9999px;
+  background: var(--color-primary);
+  /* 흰 링 — 선 위를 지날 때 실에 꿴 구슬처럼 읽히게 선을 잠깐 끊는다 */
+  box-shadow: 0 0 0 3px #ffffff;
+  opacity: 0;
+  pointer-events: none;
+}
+/* ①→② 진입선. 고리 밖이지만 한 바퀴의 출발점이라 첫 구간을 맡는다. */
+.cv-dot-e {
+  top: 0;
+  transform: translate(-50%, -50%);
+  animation: cv-run-right 5s linear infinite;
+}
+.cv-dot-t {
+  top: 0;
+  transform: translate(-50%, -50%);
+  animation: cv-run-right 5s linear 1s infinite;
+}
+.cv-dot-r {
+  right: 0;
+  transform: translate(50%, -50%);
+  animation: cv-run-down 5s linear 2s infinite;
+}
+.cv-dot-b {
+  bottom: 0;
+  transform: translate(-50%, 50%);
+  animation: cv-run-left 5s linear 3s infinite;
+}
+.cv-dot-l {
+  left: 0;
+  transform: translate(-50%, -50%);
+  animation: cv-run-up 5s linear 4s infinite;
+}
+@keyframes cv-run-right {
+  0% { left: 0%; opacity: 1; }
+  20% { left: 100%; opacity: 1; }
+  20.01% { opacity: 0; }
+  100% { left: 100%; opacity: 0; }
+}
+@keyframes cv-run-down {
+  0% { top: 0%; opacity: 1; }
+  20% { top: 100%; opacity: 1; }
+  20.01% { opacity: 0; }
+  100% { top: 100%; opacity: 0; }
+}
+@keyframes cv-run-left {
+  0% { left: 100%; opacity: 1; }
+  20% { left: 0%; opacity: 1; }
+  20.01% { opacity: 0; }
+  100% { left: 0%; opacity: 0; }
+}
+@keyframes cv-run-up {
+  0% { top: 100%; opacity: 1; }
+  20% { top: 0%; opacity: 1; }
+  20.01% { opacity: 0; }
+  100% { top: 0%; opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cv-dot {
+    animation: none;
   }
 }
