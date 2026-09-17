@@ -21,6 +21,10 @@ export default function SocialProof() {
         </div>
         <dl className="mt-8 grid grid-cols-2 gap-6 rounded-2xl bg-white px-6 py-10 shadow-[0_10px_30px_rgba(0,0,0,0.06)] md:grid-cols-4">
           <div className="text-center">
+            <dt className="text-lg font-black text-primary md:text-xl">{t("social.univ_name")}</dt>
+            <dd className="mt-2 text-sm text-body">{t("social.univ_label")}</dd>
+          </div>
+          <div className="text-center">
             <dt className="text-3xl font-black text-primary md:text-4xl">3</dt>
             <dd className="mt-2 text-sm text-body">{t("social.poc_label")}</dd>
           </div>
@@ -31,10 +35,6 @@ export default function SocialProof() {
           <div className="text-center">
             <dt className="text-3xl font-black text-primary md:text-4xl">2,300+</dt>
             <dd className="mt-2 text-sm text-body">{t("social.tests_label")}</dd>
-          </div>
-          <div className="text-center">
-            <dt className="text-lg font-black text-primary md:text-xl">{t("social.univ_name")}</dt>
-            <dd className="mt-2 text-sm text-body">{t("social.univ_label")}</dd>
           </div>
         </dl>
       </Reveal>

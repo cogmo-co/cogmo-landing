@@ -5,14 +5,11 @@ import Link from "next/link";
 import { useT } from "@/lib/i18n/LanguageContext";
 import Reveal from "@/components/home/Reveal";
 
-/**
- * 전문가의 말 ↔ 고객의 되물음. 사전 키 순서로는 짝이 안 맞아(quote1 은 question3 과 맞물린다)
- * 여기서 명시적으로 묶는다. 사전 순서를 바꾸면 6개 언어를 다 건드려야 해서 이쪽에 둔 것.
- */
+/** 말로 전달되는 설명 ↔ 고객이 확인하고 싶은 것. 사전의 같은 번호끼리 맞물린다. */
 const PAIRS: [string, string][] = [
-  ["problem.quote1", "problem.question3"], // 전보다 많이 좋아졌습니다 ↔ 지난달보다 실제로 좋아졌나요?
-  ["problem.quote2", "problem.question1"], // 균형이 조금 나아졌습니다 ↔ 현재 제 상태가 어떤가요?
-  ["problem.quote3", "problem.question2"], // 이 운동을 계속하면 좋겠습니다 ↔ 왜 이 운동을 해야 하나요?
+  ["problem.quote1", "problem.question1"], // 전보다 많이 좋아졌습니다 ↔ 얼마나 많이 좋아졌나요?
+  ["problem.quote2", "problem.question2"], // 균형이 조금 개선됐습니다 ↔ 정말 개선됐는지 모르겠어요
+  ["problem.quote3", "problem.question3"], // 이 운동을 계속하면 좋겠습니다 ↔ 왜 이 운동을 해야 하나요?
 ];
 
 /**
@@ -128,7 +125,9 @@ export default function Problem() {
         </div>
 
         {/* 결론은 두 목소리를 다 보여준 뒤에 온다. 먼저 말하면 아래 질문이 근거가 아니라 사족이 된다 */}
-        <p className="mt-10 text-center leading-relaxed text-body">{t("problem.transition")}</p>
+        <p className="mt-10 whitespace-pre-line text-center leading-relaxed text-body">
+          {t("problem.transition")}
+        </p>
       </Reveal>
 
       {/* 브랜드 파트 — 같은 문제를 만든 사람 쪽에서 다시 말하는 코다.
@@ -155,7 +154,10 @@ export default function Problem() {
           <path d="M6 12.5 12 18.5 18 12.5" className="stroke-primary-dark" />
         </svg>
 
-        <div className="mt-12 grid grid-cols-1 gap-10 md:grid-cols-2 md:items-center md:gap-14">
+        {/* 모바일 간격이 md 보다 넓은 건 오타가 아니다. md 의 gap 은 두 열 사이 가로 간격이지만
+            모바일에서는 메모와 서사 사이 세로 간격이 되는데, 메모지가 기울어져 있고(rotate-1)
+            펜이 아래로 삐져나와 시각적 바닥이 박스보다 낮다. gap-10 이면 제목이 메모에 붙어 보인다. */}
+        <div className="mt-12 grid grid-cols-1 gap-16 md:grid-cols-2 md:items-center md:gap-14">
           <div>
             <h3
               id="brand-story"
@@ -178,8 +180,12 @@ export default function Problem() {
 
           {/* 서류 두 장이 겹쳐 놓인 모양. 모서리를 둥글리지 않는 게 핵심이다 — 라운드가 붙는
               순간 UI 카드로 읽히고 종이로는 안 읽힌다. 뒤 장을 반대로 기울여 겹침을 만들고,
-              괘선이 끝까지 닿게 해서 줄 그어진 종이가 되게 한다. 노랑 없이도 서류로 보인다. */}
-          <div className="relative">
+              괘선이 끝까지 닿게 해서 줄 그어진 종이가 되게 한다. 노랑 없이도 서류로 보인다.
+
+              모바일에서는 메모가 먼저 온다(order-first). 이 코다는 "고객이 되묻는다 →
+              우리도 같은 질문을 했다 → 그래서 만들었다" 순서인데, 세로로 쌓이면 답(서사)이
+              질문(메모)보다 먼저 나와 버린다. 데스크톱은 좌우 병치라 순서가 없어 그대로 둔다. */}
+          <div className="relative order-first md:order-none">
             <div
               aria-hidden
               className="absolute inset-0 -rotate-2 border border-hairline bg-surface"

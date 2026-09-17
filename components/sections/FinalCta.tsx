@@ -14,23 +14,12 @@ export default function FinalCta() {
   return (
     <CTASection
       id="final-cta"
-      title={
-        <>
-          <span>{t("finalcta.title.l1")}</span>
-          <br />
-          <span>{t("finalcta.title.l2")}</span>
-        </>
-      }
-      description={t("finalcta.body")}
+      title={<span className="whitespace-pre-line">{t("finalcta.title")}</span>}
+      // 줄바꿈은 사전의 \n 이 갖고 있다. CTASection 의 <p> 에 whitespace 를 걸면 이 컴포넌트를
+      // 같이 쓰는 9개 페이지에 다 영향이 가므로, 여기서 감싸는 span 에만 건다.
+      description={<span className="whitespace-pre-line">{t("finalcta.body")}</span>}
       primaryAction={{ label: t("finalcta.cta1"), href: "/download" }}
       secondaryAction={{ label: t("finalcta.cta2"), href: "/contact" }}
-      footnote={
-        <>
-          Professional {t("pricing.pro.price")} {t("pricing.pro.price_suffix")} · Business{" "}
-          {t("pricing.biz.price")} {t("pricing.biz.price_suffix")} ({t("pricing.biz.subtitle")}) ·{" "}
-          {t("pricing.vat")}
-        </>
-      }
     />
   );
 }

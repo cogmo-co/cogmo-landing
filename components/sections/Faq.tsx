@@ -25,9 +25,9 @@ function FaqItem({ n }: { n: (typeof QUESTIONS)[number] }) {
           className="relative flex h-6 w-6 flex-none items-center justify-center text-primary"
           aria-hidden
         >
-          <span className="absolute h-0.5 w-6 rounded-full bg-current" />
+          <span className="absolute h-[3px] w-6 rounded-full bg-current" />
           <span
-            className={`absolute h-6 w-0.5 rounded-full bg-current transition-transform duration-200 ${
+            className={`absolute h-6 w-[3px] rounded-full bg-current transition-transform duration-200 ${
               open ? "rotate-90" : ""
             }`}
           />

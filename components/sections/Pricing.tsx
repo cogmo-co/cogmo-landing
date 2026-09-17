@@ -29,7 +29,7 @@ export default function Pricing() {
               <span className="text-body">{t("pricing.starter.price_suffix")}</span>
             </p>
             <ul className="mb-8 mt-6 space-y-3 text-sm text-body">
-              {(["feature1", "feature2", "feature3", "feature4"] as const).map((k) => (
+              {(["feature1", "feature2", "feature3", "feature4", "feature5"] as const).map((k) => (
                 <li key={k} className="flex gap-2">
                   <span className="text-primary">✓</span>
                   <span>{t(`pricing.starter.${k}`)}</span>
@@ -87,7 +87,14 @@ export default function Pricing() {
               <span className="text-body">{t("pricing.biz.price_suffix")}</span>
             </p>
             <p className="text-sm text-muted">{t("pricing.vat")}</p>
-            <p className="mt-4 text-sm font-semibold text-ink">{t("pricing.biz.included_label")}</p>
+            {/* Pro 포함 사실을 한 줄 텍스트로 두면 못 보고 지나가서 면(面)으로 강조한다. */}
+            <div className="mt-4 rounded-lg bg-primary/5 px-4 py-3">
+              <p className="flex gap-2 text-sm font-bold text-primary">
+                <span>✓</span>
+                <span>{t("pricing.biz.included_label")}</span>
+              </p>
+            </div>
+            <p className="mt-5 text-sm font-semibold text-ink">{t("pricing.biz.extra_label")}</p>
             <ul className="mb-8 mt-3 space-y-3 text-sm text-body">
               {(["feature1", "feature2", "feature3", "feature4", "feature5"] as const).map((k) => (
                 <li key={k} className="flex gap-2">

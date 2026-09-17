@@ -228,7 +228,7 @@ function MySection() {
 
 Starter/Professional/Business 플랜명, Core Value 같은 영문 eyebrow 라벨과
 FEA 5개 영역명(Core & Balance /
-Vertebral Column / Hip / Shoulder / Lower Limb)은 **의도적으로 사전에 키가 없다** — 어떤 언어를
+Thoracic / Hip / Shoulder / Lower Limb)은 **의도적으로 사전에 키가 없다** — 어떤 언어를
 선택해도 항상 영어 리터럴 문자열 그대로 렌더링해야 한다(`components/sections/Assessment.tsx`의
 FEA 카드 참고). 실수로 이런 걸 `t()`로 감싸서 사전에 키를 추가하지 말 것.
 

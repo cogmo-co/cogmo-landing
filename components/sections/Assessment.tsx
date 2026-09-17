@@ -107,7 +107,7 @@ export default function Assessment() {
             <p className="mt-6 text-sm leading-relaxed text-body">{t("assessment.card2.desc")}</p>
             <ul className="mt-5 grid grid-cols-2 gap-x-3 gap-y-1.5 rounded-xl bg-surface px-4 py-3.5 text-sm text-body">
               <li>· Core &amp; Balance</li>
-              <li>· Vertebral Column</li>
+              <li>· Thoracic</li>
               <li>· Hip</li>
               <li>· Shoulder</li>
               <li>· Lower Limb</li>

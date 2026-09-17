@@ -29,10 +29,11 @@ export default function Hero() {
           <br />
           <span className="text-primary">{t("hero.title.l2")}</span>
         </h1>
-        <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-body md:text-lg">
+        <p className="mx-auto mt-6 max-w-2xl whitespace-normal text-base sm:whitespace-pre-line leading-relaxed text-body md:text-lg">
           {t("hero.subcopy")}
         </p>
-        <div className="mt-8 flex flex-wrap justify-center gap-3">
+        {/* id 는 StickyCta 가 관찰한다 — 이 버튼이 화면에서 사라진 뒤에야 하단 고정 CTA 가 올라온다. */}
+        <div id="hero-cta" className="mt-8 flex flex-wrap justify-center gap-3">
           <Link
             href="/download"
             className="rounded-lg bg-primary px-7 py-3.5 font-medium text-white transition hover:bg-primary-dark"
@@ -47,10 +48,6 @@ export default function Hero() {
           </Link>
         </div>
         <p className="mt-6 text-sm text-muted">{t("hero.tags")}</p>
-        <p className="mt-1 text-sm text-muted">
-          Professional {t("pricing.pro.price")} {t("pricing.pro.price_suffix")} · Business{" "}
-          {t("pricing.biz.price")} {t("pricing.biz.price_suffix")}
-        </p>
       </div>
 
       {/* Dashboard Mockup: 실제 대시보드 + 폰 리포트 겹침 구성 */}
